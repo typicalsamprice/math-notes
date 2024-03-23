@@ -1,0 +1,535 @@
+% -*- compile-command: "latexmk -pdf notes.tex" -*-
+\documentclass{article}
+
+\input{template}
+%\usepackage{lmodern}
+
+\title{Calculus \& Analytic Geometry III}
+\author{Sam Price}
+
+\begin{document}
+
+\maketitle
+
+\section{What is a vector?}
+A vector (denoted $\vec{v}$) is an $n$-dimensional abstract object that has some sense of magnitude and direction.
+Most commonly, $\vec{v}$ is represented as a list of coordinates, such as $\vec{v} = \langle v_{1}, v_{2}, \ldots, v_{n} \rangle$.
+If a vector is 1, 2, or 3 dimensional, we can simply render it as an arrow pointing from the origin $(0, 0)$ to the coordinate(s) listed.
+Note that for all scalars $v_{i}$, each would be a real number (sometimes, it may be a complex number in $\C$).
+
+For two- or three-dimensional vectors, they may be written as
+\begin{equation}
+  \vec{v} = a\bm{\mathrm{i}} + b\bm{\mathrm{i}} + c\bm{\mathrm{k}}
+\end{equation}
+
+where $\bm{\mathrm{i}}, \bm{\mathrm{j}}, \bm{\mathrm{k}}$ denote the basis vectors
+and $a, b, c$ are scalars.
+
+
+Note that for scalar multiplication, for any $a \in \R$,
+the operation $a\vec{v}$ is defined by
+\begin{equation*}
+  a\vec{v} = \langle av_{1}, av_{2}, \ldots, av_{n} \rangle
+\end{equation*}
+
+For any vectors $\vec{v}$, $\vec{u}$, and $\vec{w}$ (assuming they are of equal dimension), arithmetic is defined as follows:
+
+\begin{align*}
+  \vec{v} + \vec{u} &= \langle v_{1}+u_{1}, v_{2}+u_{2}, \ldots , v_{n}+u_{n} \rangle\\
+  \vec{v} - \vec{u} &= \vec{v} + (-1 \vec{u})\\
+  \vec{v} + \vec{u} &= \vec{u} + \vec{v}\\
+  \vec{v} + (\vec{u} + \vec{w}) &= (\vec{v} + \vec{u}) + \vec{w}\\
+\end{align*}
+
+Perhaps obviously, the concept of negation is simply $-\vec{v} = -1\vec{v}$.
+
+Since we don't have a ``real'' vector multiplication operation,
+the dot product is a very real and important substitution.
+For any two vectors $\vec{v}$ and $\vec{u}$, the dot product
+$\vec{v} \cdot \vec{u}$ is computed as:
+\begin{equation}\label{dot-product-defn}
+  \vec{v} \cdot \vec{u} = \sum_{i = 1}^{n}v_{i}u_{i}
+\end{equation}
+
+\textbf{Note}: The dot product's result is not another vector, but a scalar value.
+
+To find the length of a vector (or its ``magnitude''), a general
+way is following (where $\norm{\vec{v}}$ denotes the length of $\vec{v}$)
+the relationship of:
+\begin{equation}\label{vec-length-defn}
+  \norm{\vec{v}}^{2} = \vec{v} \cdot \vec{v}
+\end{equation}
+
+\subsection{Cross Product}
+The cross product between two vectors is interesting, since
+it literally brings a new dimension to the two vectors going through the operation.
+Given two vectors, we see the cross product ($\times$) is equal to
+\begin{equation}
+  \vec{v} \times \vec{u} = \norm{\vec{v}}\norm{\vec{u}}\sin(\theta)\vec{n}
+\end{equation}
+
+where $\theta$ is the angle between $\vec{v}$ and $\vec{u}$, and $\vec{n}$ is the unit vector
+perpendicular to the plane $\vec{v}$ and $\vec{u}$ lie inside. The angle $\theta$ is also found in the equation:
+\begin{equation}
+  \vec{v} \cdot \vec{u} = \norm{\vec{v}}\norm{\vec{u}}\cos(\theta)
+\end{equation}
+
+\section{Vector-Valued Functions}
+A function $\vec{r}(t) = \veclit{f(t), g(t), h(t)}$ is simply a vector whose
+components are run-of-the-mill real-valued functions.
+
+\subsection{Calculus of VVFs}
+The basic calculus ideas work just as expected when it comes to vector-valued functions:
+\begin{equation}\label{vvf-drdt}
+  \odf{t}\vec{r}(t) = \veclit{f'(t), g'(t), h'(t)}
+\end{equation}
+\begin{equation}\label{vvf-int-definite}
+  \int_{a}^{b}\! \vec{r}(t)\,dt = \veclit{\int_{a}^{b}\! f(t)\,dt, \int_{a}^{b}\! g(t)\,dt, \int_{a}^{b}\! h(t)\,dt}
+\end{equation}
+\begin{equation}\label{vvf-int-indefinite}
+  \int\!\vec{r}(t)\,dt = \veclit{\int\! f(t)\,dt, \int\! g(t)\,dt, \int\! h(t)\,dt} + \vec{c}
+\end{equation}
+The reason the ``$+ C$'' manifests as a vector is because each component will have its own constant.
+
+For multiplication however, differentiation and integration can get a bit quirky. Note that $f: \R \to \R$ always.
+\begin{equation}
+  \parens{f(t)\vec{r}(t)}' = f'(t)\vec{r}(t) + f(t)\vec{r}'(t).
+\end{equation}
+
+With the dot product of two VVFs,
+\begin{equation}
+  \parens{\vec{r}(t) \cdot \vec{s}(t)}' = \vec{r}'(t) \cdot \vec{s}(t) + \vec{r}(t) \cdot \vec{s}'(t)
+\end{equation}
+\indent
+and finally with cross product
+\begin{equation}
+  \parens{\vec{r}(t) \times \vec{s}(t)}' = \vec{r}'(t) \times \vec{s}(t) + \vec{r}(t) \times \vec{s}'(t).
+\end{equation}
+
+\textbf{Arc Length} for VVFs:
+\begin{align}
+  L &= \int_{a}^{b}\!\sqrt{\parens{f'(t)}^{2} + \parens{g'(t)}^{2}}\,dt\\
+  &= \int_{c}^{d}\! \sqrt{1 + \parens{f'(x)}^{2}}\,dx
+\end{align}
+
+In fact, arc length for $n$-dimensional vector functions is (with $f_{i}$ being the $i$-th component):
+\begin{equation}
+  L_{n} = \int_{a}^{b} \! \sqrt{\sum \parens{f_{i}'(t)}^{2}} \, dt = \int_{a}^{b} \! \sqrt{\vec{r}'(t) \cdot \vec{r}'(t)} \, dt
+\end{equation}
+
+Finally, we find
+\begin{equation}
+  L = \int_{a}^{b} \! \abs{\vec{r}'(t)} \, dt
+\end{equation}
+
+Note that this does in fact work for any inner product space (citation needed).
+
+A common sight is the denotion of the unit tangent vector, which is simply written as $\vec{T}(t)$ and is
+\begin{equation*}
+  \vec{T}(t) = \frac{\vec{r}'(t)}{\abs{\vec{r}'(t)}}.
+\end{equation*}
+
+\subsection{Curvature}
+The curvature $\bk$ of a curve $\vec{r}(t)$ at a given point $t$ is defined as
+\begin{equation}
+  \bk(t) = \abs*{\frac{d\vec{T}}{dS}}
+\end{equation}
+
+where $S$ is the arc length of $\vec{r}$. This means that the curvature is
+independent of the parametrization (i.e., stays constant with scaling) of $\vec{r}$. Expanding,
+\begin{equation*}
+  \bk = \abs*{\frac{\vec{T}'(t)}{\frac{dS}{dt}}} = \frac{\abs*{\vec{T}'(t)}}{\abs*{\vec{r}'(t)}}.
+\end{equation*}
+
+Another form:
+\begin{equation}
+  \bk = \frac{\abs{\vec{r}'(t) \times \vec{r}''(t)}}{\abs{\vec{r}'(t)}^{3}}.
+\end{equation}
+
+\section{Multivariate Functions}
+A function is called \textit{multivariate}, or \textit{multivariable}, when the function $f$ has multiple variables.
+Example:
+\begin{displaymath}
+  f(x, y) = x^{2} + y.
+\end{displaymath}
+
+These are commonly graphed using a \textit{contour map}, where the $xy$-plane is the inputs (for 2-variable functions)
+and the $z$-axis is the value of $f$.
+
+The domain of $f$ is commonly $\R$ for both variables, but in general its signature looks similar to
+\begin{equation}
+  f: S \times D \to \R.
+\end{equation}
+Where $S, D \subseteq \R$. If $S = D = \R$, then simply $f: \R^{2} \to \R$ will suffice.
+
+\subsection{Limits}
+These are, apparently, the worst thing on Earth.
+
+Multivariate functions (in this case, the example is a 2D function $f$) have infinitely many
+ways to approach $(0, 0)$ for the tuple $(x, y)$. This is why the limit
+\begin{equation*}
+  \lim_{(x, y) \to (0, 0)} f(x, y)
+\end{equation*}
+is not a well-defined notion.
+
+This is simply because instead of traversing an interval, there is a disk around the point $(c, d)$ that we would need to ``approach'' from.
+
+The ``real'' method you manually would use is to approach the limit from many different directions (4 or more) and hope you get a collision
+where the limits either do not agree or don't exist, period. Otherwise, good luck checking $\aleph_{1}$ directions at once!
+
+We don't need to do multivariable analysis, because that's some grad school BS, and too hard for a piddly little Calc III course.
+
+\subsubsection{Examples}
+Try to determine what the following limits are, if they exist:
+
+\[
+  \lim_{(x, y) \to (0, 0)} \frac{xy}{x^{2} + y^{2}}
+\]
+
+Approaching along $x = 0$:
+\begin{align*}
+  \lim_{y \to 0} \frac{0}{y^{2}} &= \lim_{y \to 0} \frac{0}{2y}\\
+  &= \lim_{y \to 0} \frac{0}{2} = 0.
+\end{align*}
+
+Approaching along $y = 0$, it is also 0.
+For $x = y^{2}$, we find
+\begin{equation*}
+  \lim_{y \to 0}\frac{y^{3}}{2y^{2}} = \lim_{y \to 0}\frac{y}{y^{2} + 1} = 0.
+\end{equation*}
+For $x = y$:
+\begin{equation*}
+  \lim_{y \to 0}\frac{y^{2}}{2y^{2}} = \frac{1}{2}.
+\end{equation*}
+
+This is annoying however, since $0 \ne 1/2$. Therefore the limit does not exist.
+
+Another example: $(x, y) \to (0, 0)$ for $\frac{2x^{2}y}{x^{2} + y^{2}}$.\\
+The limit is 0. Dear reader, kick rocks.
+
+\subsection{Derivatives}
+
+The derivative of a function $f(x, y)$ can only be taken with respect to one variable at a time, with the other(s) being
+treated as constants or a function only in terms of one variable.
+
+\begin{equation}
+  \pdf{x}f(x, y) = f'_{x}(x, y).
+\end{equation}
+
+In these situations, other variables are treated as constants, so
+\begin{equation}
+  \pdf{x}\parens*{x^{2}y^{2}} = 2y^{2}x
+\end{equation}
+
+\begin{equation}
+  \pdf{y}\parens*{x^{2}y^{2}} = 2x^{2}y
+\end{equation}
+
+Second partial-derivatives:
+\begin{align*}
+  \pdf[2]{x} f(x, y) = f_{xx} & \qquad f_{xy} = \pdf{y}\parens*{\pdf{x} f}
+\end{align*}
+
+Note that it is \textit{often} true that $f_{xy} = f_{yx}$, however it is not \textit{always} true.
+\begin{thm}{Mixed Partial Derivatives}{mixed-partials}
+  For any two-variable function $f$, the second partial derivatives
+  \[
+    f_{xy} = f_{yx}
+  \]
+  if $f$ is continuous.
+\end{thm}
+
+\subsubsection{Directional Derivatives}
+
+\begin{defn}{Directional Derivative}{}
+  The directional derivative of $f(x, y)$ in the direction of (unitary) vector $\vec{u} = \veclit{a, b}$ is
+  \[
+    \mathrm{D}_{\vec{u}}f = f_{x}a + f_{y}b.
+  \]
+
+  This can be thought of as the dot product $\veclit{f_{x}(t), f_{y}(t)} \cdot \vec{u}$.
+\end{defn}
+
+The \emph{gradient} of $f$ is exactly the vector above, namely
+\[
+  \veclit{f_{x}, f_{y}}.
+\]
+Generally, the gradient, $\nabla f$ is generalized to as many variables as required,
+\[
+  \nabla f(x_{1}, x_{2}, \ldots, x_{n}) = \veclit{\pdf{x_{1}}, \pdf{x_{2}}, \ldots, \pdf{x_{n}}}.
+\]
+
+Thus, we can generalize the directional derivative to $n$ dimensions as simply
+\[
+  \mathrm{D}_{\vec{u}}f = \nabla f \cdot \vec{u}.
+\]
+
+\subsection{Optimization}
+\begin{defn}{Tangent Plane}{}
+  The \emph{tangent plane} to $f(x, y)$ at $p = (x_{0}, y_{0}, z_{0})$ is the plane
+  which contains both the tangent lines for $f_{x}(x_{0}, y_{0})$ and $f_{y}(x_{0}, y_{0})$.
+  The plane can be defined by the equation (when $f$ is continuous)
+  \[
+    z - z_{0} = f_{x}(x_{0}, y_{0})(x - x_{0}) + f_{y}(x_{0}, y_{0})(y - y_{0}).
+  \]
+\end{defn}
+
+\begin{ex}[Tangent Plane 1]
+  Find the tangent plane for $z = 4x^{2} - y^{2}$ at $(0, 1, 2)$.
+  Note that
+  \begin{align*}
+    \pdf{x}(z) &= 8x\\
+    \vspace{0.25mm}\textrm{and}\vspace{0.25mm}\\
+    \pdf{y}(z) &= -2y
+  \end{align*}
+
+  Plugging these into the previous equation, we find
+  \[
+    z = -2y + 4.
+  \]
+\end{ex}
+
+\begin{thm}[Maximum of Directional Derivative]
+  Given any 2 or 3 dimensional function $f$ that is continuous, the maximum value of
+  $\mathrm{D}_{\vec{u}}f$ is $\norm{\nabla f}$, which occurs when $\vec{u}$ is in the direction of $\nabla f$.
+
+  \begin{proof}
+    Note that
+    \[
+      \mathrm{D}_{\vec{u}}f = \nabla f \cdot \vec{u} = \norm{\nabla f}\norm{\vec{u}}\cos(t).
+    \]
+
+    Since $\vec{u}$ is unitary and $\cos(\theta)$ is maximal when $\theta = 0$, we see that
+    this is maximum when the angle between $\nabla f$ and $\vec{u}$ is nonexistent, or in the
+    same direction.
+  \end{proof}
+\end{thm}
+
+\subsection{Tangent Planes and Normal Lines}
+Consider the surface $z = f(x, y)$ which can be rewritten as
+\[
+  F(x, y, z) = k
+\]
+for some constant $k$. Suppose that $\vec{r}(t) = \veclit{x(t), y(t), z(t)}$ is some curve
+on the level surface $F$. Then:
+\[
+  \pdf{x}F \cdot \pdf{t}x + \pdf{y}F \cdot \pdf{t}y  + \pdf{z}F \cdot \pdf{t}z = 0.
+\]
+This is equivalent to
+\[
+  \nabla F \cdot \vec{r}'(t) = 0.
+\]
+The tangent plane to the surface at a given point is the plane passing through that point
+with the normal vector $\nabla F$.
+The normal line is the line passing through $F(t)$ and is perpendicular to the tangent plane, meaning it
+has the same direction as $\nabla F$.
+
+\begin{ex}[Tangent Plane and Normal Line 1]
+  Find the tangent plane and normal line to
+  \[
+    x^{2} - \frac{y^{2}}{4} + \frac{z^{2}}{16} = 5
+  \]
+  at $(1, 2, 3)$.\\
+  Note that
+  \[
+    \nabla f = \veclit{2x, -\frac{y}{2}, \frac{z}{8}}.
+  \]
+  and evaluated at our point, we find
+  \[
+    \nabla f(1, 2, 3) = \veclit{2, -1, \frac{3}{8}}.
+  \]
+  Thus, the tangent plane is
+  \[
+  2(x - 1) - (y - 2) + \frac{3}{8}(z - 3) = 0.
+  \]
+
+  Easily, the normal line is
+  \[
+    f(1, 2, 3) + t \nabla f(1, 2, 3).
+  \]
+
+\end{ex}
+
+\begin{defn}{Extrema of Multivariate Functions}{}
+  An absolute maximum of a function $f(x, y)$ exists at $(a, b)$
+  if for all $(x, y) \in \dom f$
+  \[
+    f(x, y) \le f(a, b)
+  \]
+  with minima being similarly defined.
+
+  A local (or relative) maximum, where the point $(a, b)$
+  is a local maximum if for all $(x, y)$ in some neighborhood of $(a, b)$ there is
+  \[
+    f(x, y) \le f(a, b).
+  \]
+\end{defn}
+
+\begin{prop}[Partial Derivatives at Local Extrema]
+  If $f(x, y)$ has a local extrema at $(a, b)$ and both $f_{x}(a, b)$ and $f_{y}(a, b)$ exist, then
+  \[
+    f_{x}(a, b) = f_{y}(a, b) = 0.
+  \]
+\end{prop}
+
+\begin{prop}[Lagrange Multipliers]
+  Given a function $F: \R^{2} \to \R$, there is a surface $f(x, y, z) = k$ where $k$ is constant and constraints $g_{1}, g_{2}, \ldots, g_{n}$,
+  \[
+    \grad f = \sum_{i = 1}^{n}\lambda_{i}\grad g_{i}.
+  \]
+  This system of equations can be solved for all critical points $(x, y)$ for $F$, and the extrema can be found from those.
+\end{prop}
+
+\section{Double Integrals}
+A double integral is an integral in the form
+\[ \iint f(x, y)\,dx\,dy. \]
+This can be thought of as the (signed) volume under the surface $z = f(x, y)$.
+
+\noindent
+Modeling this after the original Riemann sums, but using rectangular prisms over simple rectangles, we see
+\[ \iint f(x, y)\,dx\,dy = \lim_{\Delta x, \Delta y \to 0} \sum f(x, y) \Delta x \Delta y. \]
+In general, without distinction to Cartesian, polar or other coordinate systems, we use
+\[ \iint f(x, y)\,dA \]
+to signify the change in \emph{area} of the base of the rectangular prisms.
+
+\subsection{Evaluating in Cartesian Coordinates}
+Evaluating a double integral (sometimes called an ``iterated integral'')
+requires something akin to ``partial integration'', where one finds the ``partial antiderivative'' of the function.
+This is when the order of the infinitesimals matters most, as it is not necessarily equal both ways (see~\nameref{thm:fubini}.)
+
+\begin{ex}[Evaluate the double integral]
+  \[ \int_{1}^{2}\int_{0}^{1} xy^{3}\,dx\,dy. \]
+
+  Firstly, we must find the anti-partial derivative with respect to $x$ such that $\pdf{x}(f(x, y)) = xy^{3}$.
+  Similar to non-partial integration, we find the antiderivative would be
+  \[ \frac{x^{2}y^{3}}{2}, \]
+  which means the integral is now
+  \[ \int_{1}^{2}\frac{1}{2}\parens*{x^{2}y^{3}}\Big|_{x = 0}^{x = 1}\,dy \]
+  which can be solved easily as
+  \[ \frac{1}{2}\int_{1}^{2}y^{3}\,dy = \frac{1}{8}\parens{y^{4}}\Big|_{y = 1}^{y = 2} = \frac{15}{8}. \]
+\end{ex}
+
+\begin{thm}[Clairaut's Theorem]\label{thm:clairaut}
+  TODO:\@ Move this to a proper location\\
+  The partial derivatives
+  \[ \pdf{x}\pdf{y} f(x, y) = \pdf{y}\pdf{x} f(x, y) \]
+  if $f$ is sufficiently ``nice''.
+\end{thm}
+\begin{thm}[Fubini's Theorem]\label{thm:fubini}
+  If $f$ is continuous on a rectangle $R = \set*{ (x, y) : a \le x \le b, c \le y \le d }$, then
+  \[
+    \int_{c}^{d}\int_{a}^{b} f(x, y)\,dx\,dy
+    =
+    \int_{a}^{b}\int_{c}^{d} f(x, y)\,dy\,dx
+    = \iint_{R} f(x, y) \, dA.
+  \]
+\end{thm}
+
+\begin{ex}[Find the volume of the solid that is bounded by the coordinate planes, $x = 1$, $y = 1$ and $z = ye^{xy}$.]
+  Setting up the integrals, we need to integrate
+  \[
+    \int_{0}^{2}\int_{0}^{1} ye^{xy}\,dx\,dy.
+  \]
+  By~\nameref{thm:fubini}, we may choose the order to integrate in and $x$ is by far easier to begin with.
+  Then, we find
+  \begin{align*}
+    \int_{0}^{2}\parens*{e^{xy}}\big|_{x = 0}^{x = 1}\,dy
+    &= \int_{0}^{2}e^{y} - 1\,dy\\
+    &= \parens*{e^{y} - y}\big|_{y = 0}^{y = 2}\\ &= e^{2} - 3.
+  \end{align*}
+\end{ex}
+
+\begin{prop}[Average Value of Double Integrals]
+  The average value of a double integral
+  \[ \iint_{R}f(x, y)\,dA \]
+  is simply
+  \[ \frac{1}{A(R)}\iint_{R} f(x, y)\, dA. \]
+  Where $A(R)$ is the area of the region $R$.
+\end{prop}
+
+For rectangular regions, the bounds are always over $x \in [a, b]$ and $y \in [c, d]$.
+In general however, any function may be used as bounds (not just constant functions).
+In fact, the interior bounds may be any function of the ``outer'' variable. That is,
+\[ \int_{a}^{b}\int_{f(y)}^{g(y)}f(x, y)\,dx\,dy \]
+is a completely valid double integral.
+
+\begin{ex}[Type I Double Integral]
+  A ``Type I'' integral is for a bounded region $R$ with the outer bounds on the left and right of two curves.
+  Consider the region $R$ between the curves $y = x^{2}$ and $y = 4 - x$. This gives us the bounds (wrt $y$):
+  \[
+    \int_{\frac{1 - \sqrt{17}}{2}}^{\frac{1 + \sqrt{17}}{2}}\!\int_{x^{2}}^{4 - x}f(x, y)\,dy\,dx
+  \]
+\end{ex}
+\begin{ex}[Type II Double Integral]
+  A ``Type II'' integral is for a bounded region $R$ with the outer bounds above and below two curves.
+  Now, there is $R$ between $x = -y^{2}$ and $x = -3$. Using those bounds, we would find
+  \[ \int_{-\sqrt{3}}^{\sqrt{3}}\int_{-3}^{-y^{2}}f(x, y)\,dx\,dy. \]
+\end{ex}
+
+\subsection{Polar Coordinates}
+
+Let $z = f(r, \theta)$. Then, a polar double integral (over domain $D$) looks like
+\[ \iint_{D} z r \, dr \, d\theta. \]
+
+\begin{ex}[Cartesian to Polar Conversion]
+  Consider the double integral of
+  \[ \iint_{R} 2x+y^{2}\, dA \]
+  with $R$ being bounded by the unit circle, the circle $x^{2} + y^{2} = 4$ and $y > 0$.
+
+  We know the angle we will integral over is $0 \le \theta \le \pi$, and the radius will
+  range over $1 \le r \le 2$. Doing our substitution, we need to integrate
+  \[ \int_{0}^{\pi}\int_{1}^{2} (2r \cos(\theta) + r^{2}\sin^{2}(\theta)) r \, dr\, d\theta. \]
+  We then find
+  \begin{equation}
+    \begin{split}
+      \int_{0}^{\pi} \negmedspace \int_{1}^{2} 2r^{2}\cos(\theta) + r^{3}\sin^{2}(\theta) \, dr \, d\theta
+      &= \int_{0}^{\pi} \parens*{\frac{2r^{3}\cos(\theta)}{3} + \frac{r^{4}\sin^{2}(\theta)}{4}}\Bigg|_{r = 1}^{r = 2} \, d\theta\\
+      &= \int_{0}^{\pi} \frac{14\cos(\theta)}{3} + \frac{15\sin^{2}(\theta)}{4} \, d\theta\\
+      &= \parens*{\frac{14}{3}\sin(\theta) + \frac{15}{4}\parens*{\frac{\theta - \cos(2\theta)}{2}}}\Bigg|_{\theta = 0}^{\theta = \pi}\\
+      &= \frac{15\pi}{8}
+    \end{split}
+  \end{equation}
+\end{ex}
+
+\begin{ex}[Polar Coordinate Integral II]
+  Find the volume of $S$ inside $x^{2} + y^{2} + z^{2} = 4$ and outside $x^{2} + y^{2} = 1$.
+
+  We must then integrate:
+  \[ 2\int_{0}^{2\pi}\int_{1}^{2} \sqrt{4 - r^{2}} \cdot r \, dr \, d\theta \]
+  This leads us to
+  \[ -\frac{1}{3}\int_{0}^{2\pi} \parens*{\sqrt[2]{u^{3}}}\Bigg|_{u = 1}^{u = 4} \, d\theta \]
+  and therefore resulting in an answer of $\ds-\frac{14\pi}{3}$
+\end{ex}
+
+\section{Triple Integrals}
+
+\subsection{Polar}
+
+\subsubsection{Cylindrical Coordinates}
+
+Cylindrical coordinates can be thought of as ``lifting'' off of the $(r,\theta)$-plane. Translation is normal, as in:
+\[ (r, \theta, z) \mapsto (r \cos \theta, r \sin \theta, z) \]
+to map between rectangular and cylindrical coordinates.
+
+In general, a cylindrical integral will look like
+\[ \iiint_{E} f(r, \theta, z)r \, dr\, d\theta\, dz. \]
+
+Hence, a cylinder in height $h$ and radius $R$ will be written as:
+\[
+  \int_{0}^{h}\int_{0}^{2\pi}\int_{0}^{R} r \, dr \, d\theta \, dz = \pi R^{2}h.
+\]
+
+\subsubsection{Spherical Coordinates}
+
+\begin{ex}[Motivating Problem]
+  What is the volume of the circular cylinder with radius $R$ and height $h$?
+  \[ \int_{0}^{2\pi}\int_{0}^{R} h\,dr\,d\theta = \pi R^{2}h. \]
+  To do this in a single triple-integral, we need to use cylindrical coordinates:
+  \[ (r, \theta, z). \]
+  Or, regrettably spherical coordinates:
+  \[ (r, \theta, \phi). \]
+
+  In cylindrical coordinates, $z$ can be thought of as the distance away from the normal $(r, \theta)$\nobreakdash-plane.
+\end{ex}
+
+\end{document}
