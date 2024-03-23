@@ -1,0 +1,32 @@
+\documentclass{article}
+
+\input{template}
+
+\author{Sam Price}
+\date{Feb. 6, 2024}
+\title{Presentation 1}
+
+\begin{document}
+
+\maketitle
+
+\begin{thm}
+  For any natural number $n$ that is \textit{not} a perfect square, $\sqrt{n}$ is irrational.
+\end{thm}
+\begin{proof}
+  Let $n$ be a natural number that is not a perfect square (since clearly $n = k^{2} \implies \sqrt{n} \in \Q$.)
+  By way of contradiction, assume $\sqrt{n}$ is rational.
+  Since $n$ is not a perfect square, we know that $n = m^{2}k$, with $m^{2}$ being the largest square number that
+  divides $n$ and $k \ne 1$. Thus, $\sqrt{n} = m\sqrt{k}$, and it is sufficient to prove that $\sqrt{k}$ is rational to show $\sqrt{n}$ is.
+  Let the prime $p \mid k$ and $\sqrt{k} = a/b$ with $a, b$ coprime and $b \ne 0$.
+  This means that $kb^{2} = a^{2}$, which requires that $p \mid a \implies a = cp, c \in \Z$. Then, we see $k = \parens{cp}^{2}/b^{2}$.
+  Now,
+  \begin{equation*}
+    b^{2}\frac{k}{p} = pc^{2}.
+  \end{equation*}
+  This means that $p \mid b^{2}\parens{k/p}$ as well, and since $k$ only has single prime factors (with $p$ removed through the division)
+  we know that this means $p \mid b^{2} \implies p \mid b$, and thus $a$ and $b$ are not coprime.
+  Hence, $\sqrt{k}$ is not rational and therefore neither is $\sqrt{n}$.
+\end{proof}
+
+\end{document}

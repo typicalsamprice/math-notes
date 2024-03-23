@@ -1,0 +1,68 @@
+% -*- compile-command: "latexmk -pdf document.tex" -*-
+\documentclass{article}
+
+\input{template}
+
+%\usepackage{lmodern}
+
+\author{Sam Price}
+\date{}
+\title{Preview Assignment 6\\\Large{Question 5}}
+
+\newcommand{\Rt}[1]{\dfrac{1}{10^{#1}}}
+
+\begin{document}
+
+\maketitle
+
+Let $S = \Q \intersect [0, 1]$. Is $S$ compact? (Allowed to use Heine-Borel)
+\vspace{0.5cm}
+
+No, $S$ is not compact. We aim to show this by constructing an open cover which does not admit a finite subcover.
+
+Firstly, assume every element in $S$ is written in lowest terms. That is,
+\[ S = \set*{\frac{p}{q} : 0 \le p \le q, \gcd(p, q) = 1 }. \]
+
+Let the cover of $S$
+\[ \sC = \set*{\parens*{\frac{a}{b} - \Rt{b}, \frac{a}{b} + \Rt{b}}}_{\frac{a}{b} \in S} \]
+be the central object of this proof.
+
+Unrelated to the actual proof, but the bounds on the sum of all were a little bit off, in that
+\[
+  \sum_{C \in \sC} \ell(C) = \sum_{k = 1}^{\infty}\frac{2\varphi(k)}{10^{k}}
+  < \frac{2}{10} + \sum_{k = 2}^{\infty}\frac{2(k - 1)}{10^{k}}
+\]
+with $\varphi$ being Euler's totient function.
+
+In this article, let $\gamma(p/q) = q$, for any rational $p/q$ in canonical form.
+%Similarly, let $\lambda(p/q) = p$. Therefore, for any $r \in S$ we see $r = \lambda(r)/\gamma(r)$.
+
+\section{Main Proof}
+\begin{proof}
+  Suppose there exists a finite subcover $\sU \subset \sC$,
+  with $n > 3$ (we can trivially check up to $n = 3$ manually, as at least one of $\set{0, 0.25, 0.75, 1}$ would be uncovered) rational indices
+  \[ r_{1}, r_{2}, \ldots, r_{n} \]
+  with the relationship
+  \[ 0 = r_{1} < r_{2} < \cdots < r_{n} = 1. \]
+  Suppose without loss of generality that $\sU$ is minimal, or there is no $r_{a}, r_{b}$ such that
+  \[ U_{r_{a}} \subset U_{r_{b}}, \]
+  as otherwise $U_{r_{a}}$ could be removed entirely, still having a finite subcover.
+
+  % Let $q$ be the maximal denominator
+  % \[ q = \max\set*{\gamma(r_{1}), \gamma(r_{2}), \ldots, \gamma(r_{n})}. \]
+  Now, define $d$ be the maximum distance between consecutive $r_{i}$
+  \[ d = \max\set*{r_{2} - r_{1}, r_{3} - r_{2}, \ldots, r_{n} - r_{n - 1}}. \]
+  By the pigeonhole principle, we know $d \ge 1/(n - 1)$.
+  Let $s, t$ be two such consecutive $r_{i}$ such that they satisfy $t - s = d$ and minimizes the value of $\abs*{\gamma(s) - \gamma(t)}$,
+  assuming $s < t$.
+
+  If $s$ is covered by $\sU \setminus U_{s}$, then there exists $r_{\alpha} < s$ such that
+  \begin{align*}
+    \Rt{\gamma(r_\alpha)} > \abs{s - r_{\alpha}} &\ge \frac{1}{\gamma(s)\gamma(r_{\alpha})}\\
+    \implies 10^{\gamma(r_{\alpha})} &< \gamma(s)\gamma(r_{\alpha})\\
+    \implies \frac{10^{\gamma(r_{\alpha})}}{\gamma(r_{\alpha})} &< \gamma(s)\\
+  \end{align*}
+\end{proof}
+
+
+\end{document}

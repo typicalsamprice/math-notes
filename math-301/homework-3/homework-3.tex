@@ -1,0 +1,158 @@
+% -*- compile-command: "latexmk -pdf homework-3.tex" -*-
+\documentclass{article}
+
+\input{template}
+
+\author{Sam Price}
+\date{}
+\title{Homework \#3}
+
+\begin{document}
+
+\maketitle
+
+\begin{enumerate}
+
+    \item Exercise 5.1: For each of the following, determine whether the set is open, closed, neither and if it is compact.
+        You \emph{do} need to prove your answers.
+        \begin{enumerate}
+          \item $\Z$
+
+                $\Z$ is definitely open, as for each integer there is an $\eps$-neighborhood around it contained within $\Z$.
+                Any value of $\eps > 0$ satisfies this, and so is open.
+                It is also closed, since $\comp{\Z} = \emptyset$ which we already know to be open. However, $\Z$ is not compact, because while it
+                \emph{is} closed, it is not bounded and therefore not compact.
+
+          \item $S = \set{1, \frac{1}{2}, \frac{1}{3}, \ldots} \union \set{0}$
+
+                This set is not open, as for the values $0, 1 \in S$ there is no $\eps$-neighborhood contained entirely within $S$.
+                Let $S'$ be the complement of $S$. Note that we can write this set as
+                \[ S' = (-\infty, 0) \union (1, \infty) \union \parens*{\bigcup_{n = 1}^{\infty}\parens*{\frac{1}{n + 1}, \frac{1}{n}}}. \]
+                Since this is a union of (countably many) open sets, we know then that $S'$ is open, and therefore that $S$ is closed.
+
+                Note also that $S \subset [0, 1]$, which means that it is not only closed, but bounded. Therefore, $S$ is compact.
+
+          \item $\R$
+
+                We already know that $\R$ is clopen, and since there are arbitrarily large (in magnitude) elements we know it is not bounded,
+                and thus not compact.
+
+                Short re-proof of $\R$ being open and closed: $\R$ is open since for any $r \in \R$, every $\eps > 0$ has the property that
+                \[ (r - \eps, r + \eps) \subset \R. \]
+                Similarly, we know that $\R$ is closed because the complement ($\emptyset$) is open. This is because there are no values to
+                \emph{prove} the existence of an $\eps$-neighborhood not contained within itself.
+
+          \item $S = (0, 1) \union [3, 4]$
+
+                This set is not closed (nor compact), since the limit point of $1 \notin S$.
+                We also know $S$ is not open as there are no $\eps$-neighborhoods centered on $3, 4 \in S$
+                that lie wholly within $S$.
+
+          \item $\Q$
+
+                Firstly, $\Q$ is not bounded, so we know it must not be compact.
+                We also know that for each $x \in \Q$, no $\eps$-neighborhood is within $\Q$, and thus $\Q$ is not open.
+                It also contains no irrationals, which are limit points of some (most convergent?) sequences in $\Q$. Therefore,
+                $\Q$ is \emph{nothing}, or at least not compact, closed nor open. Also in this case, is $\Q = \del\Q$?
+
+          \item $\set{17}$
+
+                This set is trivially compact, and therefore closed, because every open cover $\sC$ of this has a finite subcover by virtue of
+                taking any single $C \in \sC$ for which $17 \in C$ as a valid subcover with one interval.
+
+                Note also that there is no $\eps$-neighborhood centered on 17 within this set, since it is only that single point,
+                meaning it cannot be open.
+        \end{enumerate}
+
+  \item For each of the following, you should state which sets you are choosing and what their intersection/union is.
+        You DO need to prove your example is valid.
+
+        \begin{enumerate}
+
+          \item An example of an infinite collection of open sets whose intersection is \emph{not} open.
+
+                The sets $S_{i \in \N} = \parens*{-\frac{1}{i}, \frac{1}{i}}$ satisfy this, since their intersection is simply $\set{0}$, and
+                singleton sets are not open (shown in 1f).
+
+          \item Given an example of an infinite collection of closed sets whose union is \emph{not} closed.
+
+                The union of the sets:
+                \[ \bigcup_{n \in \N}\bracks*{\frac{1}{n}, n} = \lparen 0, \infty \rparen. \]
+                Which is open, and since it is not $\R$ nor $\emptyset$, we know by my presentation it is not closed.
+
+          \item Give an example of an infinite collection of compact sets whose union is \emph{not} compact.
+
+                I refuse to reuse that example again, but this one will be a little fun (at least for me). Consider the set
+                \[ I = \set*{ \frac{p}{q} : 0 \le p \le q, \gcd(p, q) = 1 }. \]
+                The union of (compact, by closedness + boundedness) sets
+                \[ S = \bigcup_{p/q \in I}\bracks*{\frac{p}{q} - \frac{1}{10^{q}!}, \frac{p}{q} + \frac{1}{10^{q}!}}. \]
+                This is clearly has $S \supset \Q \intersect [0, 1] $, but since the sum of the sizes of all the intervals:
+                \[ \frac{2}{10!} + \frac{2}{100!} + \sum_{k = 3}^{\infty}\frac{k - 1}{10^{k}!} < 1 \]
+                we know it does not contain \emph{all} the numbers within $[0, 1]$, and thus cannot be compact,
+                as much like $\Q$, $S$ will have limit points not contained within itself.
+
+                I will discuss this with you at some point, since it doesn't make much sense to me but
+                apparently this was good enough to show a finite subcover didn't exist in the case I was trying for,
+                since I swapped it from purely exponential to the factorialized version.
+
+        \end{enumerate}
+
+  \item Prove that $x$ is a limit point of $A \subseteq \R$ if and only if every $\eps$-neighborhood of $x$
+        intersects $A$ at some point other than $x$.
+
+        Suppose not, and there exists $(a_{n}) \to x$ where each $a_{n} \in A \setminus \set{x}$ and some $\eps_{0} > 0$ such that
+        for all $0 < \eps < \eps_{0}$ we find
+        \[ (x - \eps, x + \eps) \intersect (A \setminus \set{x}) = \emptyset. \]
+        However, this is a contradiction as the definition of sequence convergence requires that ``eventually'', $(a_{n > N}) \subset N_{\eps}(x)$.
+        This is impossible when $\eps < \eps_{0}$ though, since those neighborhoods of $x$ are entirely disjoint from $A \setminus \set{x}$.
+
+
+  \item Prove that
+        \[ \set*{\parens*{\frac{1}{k}, 4 - \frac{1}{k}}}_{k \in \N} \]
+        is an open cover of $(0, 4)$, but this cover has no finite subcover, therefore implying $(0, 4)$ is not compact.
+
+        \underline{Proof of Covering}:
+        Let $x \in (0, 4)$. Suppose without loss of generality that $x$ is closer to 0, or $x < 4 - x$.
+        By the Archimedean Property of $\R$, we know there exists some $n \in \N$
+        such that $1/n < x$. Thus, we can find a suitable cover index $n$ that contains $x$.
+
+        \underline{Proof of Lack of Subcover}:
+        I presume I may not simply say $(0, 4)$ is not compact, and therefore one does not exist.
+        Therefore, assume by way of contradiction that a finite subcover does exist. Note that each interval
+        within our open cover is a subset of the next, and therefore $n > m$ implies $I_{m} \subset I_{n}$, with $I_{k}$
+        denoting the interval indexed by $k$. Therefore, if we have a finite number of intervals, we also have a \emph{maximum}
+        index of these intervals, say $n$. Thus if we let our subcover be $\sA$, we see
+        \[ \bigcup_{\alpha \in \sA}\alpha = \parens*{\bigcup_{\alpha \in \sA \setminus I_{n}}\hspace{-0.25cm}\alpha} \union I_{n} = I_{n} = \parens*{\frac{1}{n}, 4 - \frac{1}{n}}. \]
+        However, this does not cover $(0, 4)$, as we can see it covers only down to $1/n$, and if we let $x = \frac{1}{2n}$, we see
+        $x \in (0, 4)$ but $x \notin I_{n}$. Thus, it does not cover $(0, 4)$, and therefore our interval is not compact.
+
+  \item \begin{enumerate}
+
+          \item Prove that if $A$ is compact, then $\sup A$ exists and $\sup A \in A$. Does the same hold for the infimum?
+
+                Counterexample: $\emptyset$. Now, assume $A \ne \emptyset$.
+                \begin{proof}
+                  Let $A$ be a nonempty and compact set. Since $A$ is bounded, $\sup A$ exists by the least upper bound
+                  property of $\R$. We also know that because $A$ is compact, it contains all of its limit points.
+                  Therefore, we know $\sup A \in A$, since the supremum of $A$ is itself a limit point. This is clearly if we
+                  construct a sequence by the ``no-gap lemma'' by using the fact we can get ever-tighter neighborhoods of $\sup A$ still
+                  intersecting inside $A$.
+                \end{proof}
+
+
+          \item Give an example of a set which contains its infimum and supremum but is \emph{not} compact.
+
+                The set $\set{0} \union \set{2} \union (0, 1)$ contains both 0 and 2 (its infimum and supremum, respectively)
+                but is not compact.
+
+
+          \item If a set contains its infimum and supremum, and all of its limit points, must it be compact?
+                \begin{proof}
+                  Yes, since its infimum and supremum exist, we know this set is bounded. It contains all of its limit points as well,
+                  so it must be closed. By Heine-Borel, a closed and bounded set is compact.
+                \end{proof}
+
+        \end{enumerate}
+\end{enumerate}
+
+\end{document}

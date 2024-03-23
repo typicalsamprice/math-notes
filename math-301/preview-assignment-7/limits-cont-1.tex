@@ -1,0 +1,146 @@
+% -*- compile-command: "latexmk -pdf limits-cont-1.tex" -*-
+\documentclass{article}
+
+\input{template}
+
+\author{Sam Price}
+\date{}
+\title{Limits and Continuity I}
+
+\usepackage{pgfplots}
+
+\begin{document}
+
+\maketitle
+
+\begin{enumerate}
+
+  \item Consider the function $f\from \R \to \R$ defined as
+        \[
+        f(x) = \begin{cases}
+          2x + 1 & x \ge 0\\
+          -2x - 1 & x < 0.
+        \end{cases}
+        \]
+
+        This is a walkthrough (by our Dear Dr. Spence, not I) for the proof that $\lim\limits_{x \to c} f(x) = f(c)$ for $c \ne 0$.
+
+        \begin{enumerate}
+
+          \item Clearly, $f$ is piecewise. As such, our proof should have 2 cases depending on $c \in \R$. Write the two cases down.
+
+                The case of $c > 0$, in which case $f(c) = 2c+1$.
+
+                The case of $c < 0$, when $f(c) = -2c - 1$.
+
+          \item The Scratch Work Phase. Compute (and simplify) the expressions for $\abs*{f(x) - f(c)}$ for $x, c$ in your two cases above.
+
+                If $x,c > 0$, we have
+                \[ \abs*{f(x) - f(c)} = \abs*{2x + 1 - (2c + 1)} = 2\abs*{x - c}. \]
+                Similarly, for $x, c < 0$ there is
+                \[ \abs*{- 2x - 1 - (-2c - 1)} = 2\abs*{c - x} = 2\abs*{x - c}. \]
+
+          \item Explain why it is important to assume \emph{both} $x$ and $c$ are in the same case for each expression.
+
+                If $x < 0$ and $c > 0$ (or vice versa), it wouldn't be helpful as they would evaluate on totally different branches of $f$.
+                This will be important later, because we are only choosing $x$ ``close enough'' to $c$.
+
+          \item Now, let $\eps > 0$ and choose a $\delta > 0$ small enough so that $x, c$ are in the same branch (as I said!)
+                and that $\abs{f(x) - f(c)} < \eps$. We \emph{can} choose a different $\delta$ for each case, but I am choosing one for both
+                simultaneously, since that is possible for this specific $f$.
+
+                Let $\eps > 0$. Since both $c, \eps$ are real numbers, there exists integers $m,n > 0$  such that we have
+                \[ \frac{1}{m} < \abs{c}, \frac{1}{n} < \frac{\eps}{2}. \]
+                Now, pick $\delta$ such that
+                \[
+                \delta = \min\set*{\frac{1}{m}, \frac{1}{n}} < \min\set*{\abs{c}, \frac{\eps}{2}}.
+                \]
+
+                Therefore, we find $\abs{x - c} < \delta \implies \abs{f(x) - f(c)} = 2\abs{x - c} < 2\delta < \eps$.
+
+                The rationale behind taking the \emph{minimum} of the two values, is that if $\abs{c} < \eps/2$,
+                we have to take $\delta < \abs{c}$, otherwise we may end up splitting the branches. This would be bad,
+                since it's what we been trying to avoid this whole time.
+
+                I only notice this while writing the next part: we can simply take the minimum, what I am doing trying to
+                pick naturals with AP?\ Kept in for posterity.
+
+          \item Write the proof that $\lim\limits_{x \to c}f(x) = f(c)$ if $c \ne 0$.
+
+                \begin{proof}
+                  Let $c \in \R \setminus \set*{0}, \eps > 0$. Pick $\delta$ by
+                  \[ \delta = \frac{\min\set*{\abs{c}, \eps}}{2}. \]
+                  Now, let $x \in \R$ such that $\abs{x - c} < \delta$.
+                  Since $\abs{x - c} < \frac{\abs{c}}{2}$, we know that
+                  \[ c - \frac{\abs{c}}{2} < x < c + \frac{\abs{c}}{2}. \]
+                  As such, $c < 0 \implies x < 0$ and $c > 0 \implies x > 0$.
+
+                  Consider now $\abs{f(x) - f(c)}$, and we notice that because $x$ and $c$ are in the same branch of $f$:
+                  \begin{align*}
+                    \abs{f(x) - f(c)} &= 2\abs{x - c}\\
+                    &< 2\delta\\
+                    &\le 2\parens*{\frac{\eps}{2}} = \eps.
+                  \end{align*}
+
+                  Therefore, $\lim\limits_{x \to c}f(x) = f(c)$ for $c \ne 0$.
+                \end{proof}
+
+          \item Now show that $\lim\limits_{x \to 0}f(x)$ does not exist.
+
+                \begin{proof}[By negation of limit definition]
+                  Fix $\eps = 1$, and let $\delta > 0$. We take
+                  \[ x_{0} = -\min\set*{\frac{1}{2}, \frac{\delta}{2}} \implies \abs{x_{0}} < \delta.  \]
+                  We also note that $x_{0} \in \lbrack -1/2 , 0 \rparen $.
+                  Looking at the difference as values of $f$, we see
+                  \begin{align*}
+                    \abs{f(x_{0}) - f(0)} &= \abs{ - 2x_{0} - 1 - 1}\\
+                                          &= 2\abs{-x_{0} - 1}\\
+                                          &= 2\abs{1 + x_{0}} = 2(1 + x_{0}) \qquad \textrm{We are so strong, we bent the bars! Or, $1 + x_{0} > 0$.} \\
+                                          &\ge 2 \cdot \frac{1}{2} = 1 = \eps.
+                  \end{align*}
+                  Therefore, the limit of $f$ at $0$ does not exist.
+                \end{proof}
+
+          \item Sketch the thing! Something about an $\eps$ and a $\delta$-neighborhood. Who knows??!
+
+                Note that this is $\eps = 1, \delta = 0.65$, but we know $x_{0}$ is bounded below by $-0.5$ always.
+
+                \begin{tikzpicture}[>=stealth]
+
+                  \begin{axis}[
+                    xmin=-1, xmax=1,
+                    ymin=-2, ymax=4,
+                    axis x line = middle,
+                    axis y line = middle,
+                    axis line style = <->,
+                    xlabel = {$x$}, ylabel = {$y$},
+                    xtick=\empty, ytick=\empty,
+                    extra x ticks = {-0.325},
+                    extra x tick labels = {}
+                    ]
+                    \addplot[no marks, black, ->] expression[domain=0:1, samples = 2]{2*x+1};
+                    \addplot[no marks, black, <-] expression[domain=-1:0, samples = 2]{-2*x-1};
+
+                    % Deco: https://tex.stackexchange.com/questions/246237/pgfplots-add-curly-rotated-braces-to-a-graph
+                    % Epsilons
+                    \draw [decorate, decoration={brace,amplitude=5pt,mirror}] (axis cs:0, 0) -- (axis cs:0,1)
+                      node[midway, auto, swap, outer sep = 3pt, font = \tiny]{$\eps$};
+                    \draw [decorate, decoration={brace,amplitude=5pt,mirror}] (axis cs:0, 1) -- (axis cs:0,2)
+                      node[midway, auto, swap, outer sep = 3pt, font = \tiny]{$\eps$};
+                    % Deltas
+                    \draw [decorate, decoration={brace,amplitude=5pt,mirror}] (axis cs:-0.65, 0) -- (axis cs:0,0)
+                      node[midway, xshift = 1mm, yshift = 0.5mm, auto, swap, outer sep = 3pt, font = \tiny]{$\delta$};
+                    \draw [decorate, decoration={brace,amplitude=5pt,mirror}] (axis cs:0, 0) -- (axis cs:0.65,0)
+                      node[midway, auto, swap, outer sep = 3pt, font = \tiny]{$\delta$};
+                    % x_0
+                    \node[anchor=south] at (axis cs:-0.325,0) {\tiny $x_{0}$};
+                  \end{axis}
+
+                \end{tikzpicture}
+
+        \end{enumerate}
+
+
+\end{enumerate}
+
+\end{document}

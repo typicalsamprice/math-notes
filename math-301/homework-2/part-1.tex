@@ -1,0 +1,70 @@
+  \item Prove the following sequences converge to the given value.
+        \begin{enumerate}
+          \item Let $a_{n} = 7 - \frac{1}{\sqrt{n}}$. Show that $(a_{n})$ converges to 7.
+                \begin{proof}
+                  Let $\eps > 0$, and note that $\eps^{2} > 0$ also. We may choose by the Archimedean Property some $N \in \N$
+                  large enough such that
+                  \[
+                    \frac{1}{N} < \eps^{2}.
+                  \]
+                  Thus, for all $n > N$ we find
+                  \[
+                    \frac{1}{n} < \frac{1}{N} < \eps^{2}
+                  \]
+                  and therefore
+                  \[
+                    \frac{1}{\sqrt{n}} < \frac{1}{\sqrt{N}} < \eps.
+                  \]
+
+                  Thus, we see that for all $n > N$,
+                  \[
+                    \abs*{a_{n} - 7} = \abs*{7 - \frac{1}{\sqrt{n}} - 7} = \abs*{-\frac{1}{\sqrt{n}}} = \frac{1}{\sqrt{n}} < \eps
+                  \]
+                \end{proof}
+
+
+          \item Let $a_{n} = \dfrac{2n - 2}{5n + 1}$. Show that $(a_{n}) \to \dfrac{2}{5}$.
+                \begin{proof}
+                  Let $\eps > 0$. Note that
+                  \begin{align*}
+                    \abs*{\frac{2n-2}{5n+1} - \frac{2}{5}} &= \abs*{\frac{5(2n-2) - 2(5n + 1)}{5(5n + 1)}} = \abs*{\frac{-12}{25n + 5}}\\
+                    &< \abs*{\frac{-12}{25n}} = \frac{12}{25n}.
+                  \end{align*}
+
+                  By choosing $N$ (by the Archimedean Property) such that
+                  \[
+                    0 < N\inv < \eps \cdot \frac{25}{12}
+                  \]
+                  we find that for all $n > N$,
+                  \[
+                    \frac{12}{25}\cdot \frac{1}{n} < \frac{12}{25} \cdot N\inv < \frac{12}{25}\parens*{\eps \cdot \frac{25}{12}}.
+                  \]
+
+                  Adding this inequality to the inequality described before, we see that when $n > N$
+                  \[
+                    \abs*{a_{n} - \frac{2}{5}} < \frac{12}{25n} < \frac{12}{25N} < \eps.
+                  \]
+                \end{proof}
+
+          \item Let $a_{n} = 7 - \dfrac{1}{\sqrt{n + \sqrt{n} + 13}}$. Prove $(a_{n}) \to 7$. ``By the monotone convergence theorem.''
+                \begin{proof}
+                  Let $\eps > 0$, and note that $\eps^{2} > 0$. We see that
+                  \[
+                    \abs*{a_{n} - 7} = \abs*{\frac{1}{\sqrt{n + \sqrt{n} + 13}}} = \frac{1}{\sqrt{n + \sqrt{n} + 13}}.
+                  \]
+                  Now, choose $N$ such that
+                  \[
+                    \frac{1}{N} < \eps^{2}.
+                  \]
+
+                  We see that for $n > N$, clearly
+                  \[
+                    \frac{1}{\sqrt{n + \sqrt{n} + 13}} < \frac{1}{\sqrt{n}} < \frac{1}{\sqrt{N}} < \eps.
+                  \]
+
+                  Finalizing our inequality chain, we determine for all $n > N$
+                  \[
+                    \abs*{a_{n} - 7} = \frac{1}{\sqrt{n + \sqrt{n} + 13}} < \frac{1}{\sqrt{n}} < \eps.
+                  \]
+                \end{proof}
+        \end{enumerate}

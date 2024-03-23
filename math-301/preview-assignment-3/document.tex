@@ -1,0 +1,105 @@
+\documentclass{article}
+
+\input{template}
+
+\author{Sam Price}
+\date{}
+\title{Preview Assignment 3}
+
+\begin{document}
+
+\maketitle
+
+\begin{enumerate}
+
+  \item Let $a > 0$ and $A = \set{x \in \R : x^{2} < a}$. Explain why $A$ is bounded and nonempty, citing the textbook.\\
+        Since $a > x^{2} \liff \sqrt{a} > \abs{x}$, we see by Definition 1.17 that $A$ is bounded above.
+        By Definition 1.37 of an open interval, we see $A = \OpenInt{-\sqrt{a}, \sqrt{a}}$ is nonempty,
+        since $-\sqrt{a} \ne \sqrt{a}$ for $a > 0$.
+
+  \item \begin{enumerate}
+          \item Since $\alpha^{2} > a$, and assuming there exists some $\eps > 0$ such that $\parens{\alpha - \eps}^{2} > a$, we see that
+                \begin{equation*}
+                  \alpha \ge b \implies \alpha^{2} \ge b^{2}.
+                \end{equation*}
+                Since $\alpha = \sup(A)$, we also know for any $\nu > 0$, $\alpha - \nu < b$ for some $b \in A$ (lots of strange variables here).
+                This implies that $\parens{\alpha - \nu}^{2} < b^{2}$.
+                Creating one large compound inequality, we see that
+                \begin{equation*}
+                  \parens{\alpha - \eps}^{2} < b^{2} \le \alpha^{2} < a < \parens{\alpha - \eps}^{2}.
+                \end{equation*}
+                However, this boils down to $\parens{\alpha - \eps}^{2} < \parens{\alpha - \eps}^{2}$, a clear contradiction.
+
+          \item Now, if $\alpha^{2} < a$ and there is some $\eps > 0$ such that $\parens{\alpha + \eps}^{2} < a$,
+                we see that $\alpha \ge b$, and that $\alpha - \eps < b$. Creating this inequality,
+                \begin{equation*}
+                  b^{2} \le \alpha^{2} < \parens{\alpha + \eps}^{2} < a.
+                \end{equation*}
+
+                However, if we take $c$ such that
+                \begin{equation*}
+                  c = \frac{\parens{\alpha + \eps}^{2} + a}{2},
+                \end{equation*}
+                then $\parens{\alpha + \eps}^{2} < c < a$, which implies that $\alpha < \sqrt{c}$.
+                This however is a contradiction to $\alpha$ being the supremum, with $\sqrt{c} \in A$.
+
+        \end{enumerate}
+
+  \item The equality can be explained by simple binomial expansion, and the inequality holds since $n > 0$, and this
+        means that $n^{-2} > 0$.
+
+  \item We want to show there exists some $m \in \N$ such that
+        \begin{equation*}
+          \alpha^{2} - a > \frac{2\alpha}{m} > 0
+        \end{equation*}
+        Since $\alpha^{2} - a > 0$, we know there exists some $m \in \N$ by the Archimedean Property
+        such that
+        \begin{equation*}
+          m(\alpha^{2} - a) > 2\alpha.
+        \end{equation*}
+        The claim follows naturally from this.
+
+  \item Use the above to show
+        \begin{equation*}
+          \parens*{\alpha - \frac{1}{m}}^{2} - a > 0.
+        \end{equation*}
+
+        Note that from the previous part, we know there is some $m \in \N$ where
+        \begin{equation*}
+          \alpha - \frac{2\alpha}{m} > a.
+        \end{equation*}
+        It follows then, that
+        \begin{equation*}
+          \parens*{\alpha - \frac{1}{m}}^{2} > a + \frac{1}{m^{2}} > a.
+        \end{equation*}
+
+        This is sufficient to show $\alpha^{2} \le a$, since we can choose $\eps = 1/m$
+        to reach the contradiction described in the first case.
+
+  \item Let $\alpha^{2} < a$.
+        Consider the value $a - \alpha^{2}$. Clearly, this value is positive, so we may find some
+        $n \in \N$ where
+        \begin{equation*}
+          n\parens*{a - \alpha^{2}} > 2\alpha + 1.
+        \end{equation*}
+
+        Thus, we can see
+        \begin{equation*}
+          \alpha^{2} + \frac{1}{n}\parens*{2\alpha + 1} < a.
+        \end{equation*}
+
+        Continuing this, we find
+        \begin{equation*}
+          \alpha^{2}
+          < \parens*{\alpha + \frac{1}{n}}^{2}
+          \le \alpha^{2} + \frac{1}{n}\parens*{2\alpha + 1}
+          < a.
+        \end{equation*}
+
+        Thus, when $\eps = 1/n$, we can reach our contradiction previously described for $\alpha^{2} < a$.
+
+\end{enumerate}
+
+Finally, we can say with certainty that $\alpha^{2} = a$. $\qedsymbol$
+
+\end{document}

@@ -1,0 +1,90 @@
+% -*- compile-command: "latexmk -pdf preview-assignment-6.tex" -*-
+\documentclass{article}
+
+\input{template}
+
+\author{Sam Price}
+\date{}
+\title{Preview Assignment 6\\\Large{Topology of $\R$ II}}
+
+\begin{document}
+
+\maketitle
+
+\begin{enumerate}
+
+  \item For each of the following tasks, give an example as requested or prove that one does not exist.
+
+        \begin{enumerate}
+
+          \item A nonempty open set that is a subset of $\Q$.
+
+                This cannot exist. Suppose by contradiction one does, say $S$. For each $x \in S$, $\exists \eps > 0$
+                such that $(x - \eps, x + \eps) \subseteq S$ by virtue of $S$ being open. However, between any two real numbers there
+                are infinitely many irrationals, and thus $N_{\eps}(x) \not\subseteq \Q$.
+
+          \item A nonempty closed set that is a subset of $\Q$.
+
+                Take any singleton set of a rational. Since finite sets are compact, it must be closed.
+
+          \item An infinite set with no limit points.
+
+                Example: $\N$. It is important that it is \emph{not dense} and unbounded.
+                Not true for all such sets (see the set of all reciprocals of $\N$ where 0 is a limit point)
+                but is needed to some degree I believe.
+
+          \item A bounded infinite set with no limit points.
+
+                Does not exist, by Bolzano-Weierstrass.
+
+          \item An infinite union of compact sets that is not compact.
+
+                Exists:
+                \[ \bigcup_{n = 1}^{\infty}[n - 1, n]. \]
+                Since each set is closed and bounded it is compact, but the entire union is $\lbrack 0, \infty \rparen$
+                which is \emph{not} compact. Could also just take each set as $\set{n}$.
+
+          \item An infinite intersection of compact sets that is not compact.
+
+                Does not exist. By way of contradiction suppose one such $S = \cap S_{i}$ does.
+                This $S$ must be bounded (as it as ``wide'' or less than the ``narrowest'' constituent $S_{i}$).
+                This $S$ is also closed though, since any (finite or infinite) intersection of closed ($\because$ compact) sets is also closed.
+                Hence, $S$ is closed and bounded, which is equivalent to compact.
+
+        \end{enumerate}
+
+  \item Let $x \in \R$ and consider the set $S_{1} = \set{x} \subset \R$. Prove (without Heine-Borel) that $S_{1}$ is compact.
+
+        \begin{proof}
+            Let $\sC$ be any open cover of $S_{1}$. We may construct a finite subcover by simply taking one interval that covers $x$,
+            as there must be by definition. Thus, $S_{1}$ is compact.
+        \end{proof}
+
+
+  \item Let $S_{n} = \set{x_{1}, \ldots, x_{n}} \subset \R$ for $x_{i} \in \R$. Prove that for any finite $n$, $S_{n}$ is compact.
+
+        \begin{proof}
+            Note that
+            \[ S_{n} = \bigcup_{i = 1}^{n}\set{x_{i}}. \]
+            We showed previously that singleton sets are compact.
+            We may repeat the process $n$ times, once for each element of $S_{n}$, such that our subcover contains \emph{at most} $n$ elements
+            and hence $S_{n}$ is compact.
+        \end{proof}
+
+
+  \item Let $S = \Q \intersect [0, 1]$. Is $S$ compact? (Allowed to use Heine-Borel)
+
+        No, $S$ is not compact. My more convoluted solution will be presented separately, as it is quite time-consuming now
+        and I have a lot of work to do in general.
+
+        Let $(a_{n})$ be the sequence
+        \[ a_{1} = 0.7, a_{2} = 0.70, a_{3} = 0.707, a_{4} = 0.7071, \ldots \]
+        where the $n$\nobreakdash-th term is the first $n$ digits after the decimal place of $\frac{\sqrt{2}}{2}$.
+        Since this is Cauchy, it converges, and in this case to the value we are basing the sequence upon.
+
+        However, $(a_{n}) \to \frac{\sqrt{2}}{2}$, but $\frac{\sqrt{2}}{2} \in \R \setminus \Q$, and as such $\frac{\sqrt{2}}{2} \notin S$. Therefore, $S$ does not contain all of its limit
+        points and is cannot be closed. By Heine-Borel we then can say $S$ is not compact.
+
+\end{enumerate}
+
+\end{document}

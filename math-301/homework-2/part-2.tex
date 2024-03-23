@@ -1,0 +1,44 @@
+\setcounter{enumi}{1} % We are setting this here lol
+\item Let $(a_{n}) \subset \R$ converge to $a \in \R$.
+    Given any real number $k$, show that $(k + a_{n}) \to k + a$ and $(ka_{n}) \to ka$.
+
+    \begin{proof}
+        Let $\eps > 0$. We wish to show that
+        \[
+        \abs*{k + a_{n} - (k + a)} < \eps.
+        \]
+
+        By looking at the left side, we see that
+        \begin{align*}
+        \abs*{k + a_{n} - (k + a)} = \abs*{a_{n} - a}.
+        \end{align*}
+
+        Since $(a_{n}) \to a$, we know this is always less than $\eps$ for all $n > N$, for some $N$.
+        Therefore, we can say that for all $n > N$, as appropriate for $(a_{n})$,
+        \[
+        \abs*{k + a_{n} - (k + a)} < \eps \implies (k + a_{n}) \to k + a.
+        \]
+    \end{proof}
+
+    For the multiplicative sequence:
+    \begin{proof}
+        Let $\eps > 0$. Note that
+        \[
+        \abs*{ka_{n} - ka} = \abs*{k(a_{n} - a)} = \abs*{k}\abs*{a_{n} - a}.
+        \]
+
+        Since $(a_{n}) \to a$, we know that given any $\eps > 0$ there is some point $N$
+        where for all $n > N$, $\abs*{a_{n} - a} < \eps$. Assume that $k \ne 0$, since it should be clear
+        that a sequence of all zeroes converges to 0.
+
+        Now, consider the inequality
+        \[
+        \abs*{a_{n} - a} < \dfrac{\eps}{\abs*{k}}.
+        \]
+
+        Since $\abs{k}$ > 0, $\eps/\abs{k}$ is as well. Thus, there is some $N \in \N$ where for all $n > N$
+        the above is true, and in fact
+        \[
+        \abs*{ka_{n} - ka} < \eps \implies (ka_{n}) \to ka.
+        \]
+    \end{proof}

@@ -1,0 +1,140 @@
+\documentclass{article}
+
+\input{template}
+
+\author{Sam Price}
+\date{}
+\title{Preview Assignment 2}
+
+\begin{document}
+
+\maketitle
+
+\begin{enumerate}
+
+  \item Verify that the rational numbers form a field.
+        \begin{proof}
+          I will work with this under the assumption $\Z$ is an abelian group (I believe?) with respect
+          to the operations of multiplication and addition.
+          Firstly, let us ``define'' rational addition as
+          \begin{equation}\label{eq:rational-addition}
+            \frac{a}{b} + \frac{c}{d} = \frac{ad + cb}{bd}.
+          \end{equation}
+          Since the numerator is just multiplication and addition of integers, we can say that it is one as well.
+          Similarly, $bd \in Z$ trivially. We also know $bd \ne 0$ since neither $b$ nor $d$ are zero.
+
+          Commutativity of addition:
+          \begin{align*}
+            \frac{a}{b} + \frac{c}{d} &= \frac{ad + bc}{bd}\\
+            \frac{c}{d} + \frac{a}{b} &= \frac{cb + ad}{bd}\\
+            ad + bc &= cb + ad
+          \end{align*}
+          Associativity:
+          \begin{align*}
+            \frac{a}{b} + \parens*{\frac{c}{d} + \frac{e}{f}} &= \frac{a}{b} + \frac{cf + de}{df}\\
+            &= \frac{adf + bcf + bde}{bdf}
+          \end{align*}
+          and
+          \begin{align*}
+            \parens*{\frac{a}{b} + \frac{c}{d}} + \frac{e}{f} &= \frac{ad + bc}{bd} + \frac{e}{f}\\
+            &= \frac{adf + bcf + bde}{bdf}.
+          \end{align*}
+
+          For additive inverses we see:
+          \begin{equation*}
+            -\frac{a}{b} = \frac{-a}{b} \because \frac{ab + (-ab)}{b^{2}} = 0/b = 0
+          \end{equation*}
+
+          Multiplication also is an operation under which $\Q$ is closed, where it is defined as
+          \begin{equation}\label{eq:rational-multiplication}
+            \frac{a}{b} \cdot \frac{c}{d} = \frac{ac}{bd}.
+          \end{equation}
+          For the same reason as addition, we know $bd \in Z$ and $bd \ne 0$, and similarly we see that $ac \in Z$.
+          Thus, $\Q$ is closed under multiplication.
+
+          To show multiplication is associative:
+          \begin{align*}
+            \frac{a}{b}\parens*{\frac{c}{d} \cdot \frac{e}{f}} &= \frac{a}{b}\cdot\frac{ce}{df} = \frac{ace}{bdf}\\
+            \parens*{\frac{a}{b} \cdot \frac{c}{d}}\frac{e}{f} &= \frac{ac}{bd}\cdot\frac{e}{f} = \frac{ace}{bdf}.
+          \end{align*}
+          Commutativity:
+          \begin{equation*}
+            \frac{a}{b} \cdot \frac{c}{d} = \frac{ac}{bd} = \frac{ca}{db} = \frac{c}{d}\cdot\frac{a}{b}
+          \end{equation*}
+
+          The multiplicative inverse for (nonzero) rational numbers is defined as $x\inv$ for some $x \in \Q \setminus \set{0}$.
+          We can find a suitable $x\inv$ for any $x$ by the following formula:
+          \begin{equation}\label{eq:rational-multiplicative-inverse}
+            \parens*{\frac{a}{b}}\inv = \frac{b}{a}.
+          \end{equation}
+          We know that $x\inv \in \Q$ since obviously $b \in Z$, that's a given since $a/b \in \Q$. By our previous assumption of $x \ne 0$
+          however, we can also say $a \ne 0$ and therefore the ``reversal'' of the numerator and denominator is also a valid rational number.
+          Showing the multiplication:
+          \begin{equation*}
+            \frac{a}{b} \cdot \frac{b}{a} = \frac{ba}{ab} = 1.
+          \end{equation*}
+
+          The final parts are to define subtraction and division for any $x, y \in \Q$, and then identity elements.
+          For subtraction, we simply say $x - y = x + (-y)$, which is totally okay by our finding the additive inverse of $y$.
+          Division is slightly trickier, but $x/y = xy\inv$, and since we can't divide by zero, we know $y$ is nonzero and therefore
+          has a multiplicative inverse in $\Q$.
+
+          The identity for addition is zero, and the identity element for multiplication is 1.
+          I don't feel like I need to prove anything really about that, but here's the shorthand:
+          \begin{align*}
+            &\frac{a}{b} + 0 = \frac{a}{b} + \frac{0}{1} = \frac{1\cdot a + 0 \cdot b}{1 \cdot b} = \frac{a}{b}\\\\
+            &\frac{a}{b} \cdot 1 = \frac{a}{b} \cdot \frac{1}{1} = \frac{a \cdot 1}{b \cdot 1} = \frac{a}{b}\qedhere
+          \end{align*}
+        \end{proof}
+
+  \item To begin, let's prove $\sqrt{3} \notin \Q$:
+        \begin{proof}
+          By way of contradiction, let us assume that $\sqrt{3} \in \Q$ and therefore that $\sqrt{3} = p/q$ for some coprime integers
+          $p, q$ and a nonzero $q$. Squaring both sides and multiplying by $q^{2}$ (closed under mult.),
+          we see that $3q^{2} = p^{2}$, which means that $3 \mid p^{2}$ (since $\Q$ is closed under division).
+          Extending this, $3 \mid p^{2} \implies 3 \mid p \implies p = 3k, k \in \Z$. Now, going back to $3q^{2} = \parens{3k}^{2}$
+          (with the described substitution of course) we can then see that $q^{2} = \parens{3k}^{2}/3 \implies 3 \mid q^{2} \implies 3 \mid q$.
+          This is a contradiction to our original assumption of coprimality, therefore showing that $\sqrt{3} \notin \Q$.
+        \end{proof}
+
+        The reason this doesn't work with $\sqrt{4}$, is because we cannot
+        make the jump:
+        \begin{equation*}
+          4q^{2} = p^{2} \implies 4 \mid p^{2} \implies 4 \mid p.
+        \end{equation*}
+        This is because of the classic Fundamental Theorem of Arithmetic, and any non-perfect square can't sneak its way past
+        the ``doubling'' of each factor under the exponentiation.
+        I haven't proven anything specifically, but it is something to the effect of $a^{b} \mid c^{2} \implies a^{\ceil{b/2}} \mid c$.
+
+  \item Without loss of generality, assume $a \le b$.
+        \begin{enumerate}
+            \item Case $a \ge 0, b \ge 0$:\\
+                Note that $\abs{ab} = ab$ since $ab \ge 0$. Since $\abs{a} = a$ and $\abs{b} = b$, $\abs{a}\abs{b} = ab = \abs{ab}$.
+          \item Case $a < 0, b < 0$:\\
+                Because $ab > 0$, $\abs{ab}$ is simply $ab$.
+                Now, $\abs{a} = -a$ and $\abs{b} = -b$, so $\abs{a}\abs{b} = (-a)(-b) = \parens{-1}^{2}ab = ab = \abs{ab}$.
+          \item Case $a < 0, b \ge 0$ (which implies the opposite when $a$ and $b$ are ``swapped''):\\
+                Since $ab \le 0$, we note that $\abs{ab} = -(ab) = -ab$.
+                Now that $a < 0$, we also see that $\abs{a} = -a$ and $\abs{b} = b$. As such, $\abs{a}\abs{b} = (-a)b = -ab = \abs{ab}$.
+        \end{enumerate}
+        Thus we can conclude $\abs{ab} = \abs{a}\abs{b}$ for all real $a$ and $b$.
+
+  \item Do Exercise 1.15 (a) through (d):
+        \begin{enumerate}
+                \item $\abs{x - 4} = 7 \implies x - 4 = 7 \lor 4 - x = 7 \implies x = 11 \lor x = -3$.
+                \item $\abs{x - 4} < 7 \implies -7 < x - 4 < 7 \implies -3 < x < 11$.
+                \item $\abs{x + 2} < 1 \implies -1 < x + 2 < 1 \implies -3 < x < -1$.
+                \item $\abs{x - 1} + \abs{x - 2} > 1$.
+                This one is slightly trickier, but since we know both $\abs{x-1}$ and $\abs{x-2}$ are nonnegative this
+                can simplify things quite a bit with the inequalities for $x$ on the intervals
+                $\OpenClosedInt{-\infty, 1}$, $\ClosedInt{1, 2}$ and $\ClosedOpenInt{2, \infty}$:
+                \begin{align*}
+                  -(x - 1) + -(x - 2) = 3 - 2x &> 1 \implies x < \frac{1}{2}\\
+                  (x - 1) + -(x - 2) = 1 &> 1 \implies 1 > 1 \quad \textrm{(always false)}\\
+                  (x - 1) + (x - 2) = 2x - 3 &> 1 \implies x > 2.
+                \end{align*}
+                Thus, we can see that for any $x \in \R \setminus \ClosedInt{0.5, 2}$ this inequality holds.
+        \end{enumerate}
+\end{enumerate}
+
+\end{document}

@@ -1,0 +1,56 @@
+% -*- compile-command: "latexmk -pdf 5-29.tex" -*-
+\documentclass{article}
+
+\input{template}
+
+\author{Sam Price}
+\date{}
+\title{Exercise 5.29}
+
+\begin{document}
+
+\maketitle
+
+\begin{thm}
+  The only \emph{clopen} sets in $\R$ is $\R$ itself and $\emptyset$.
+\end{thm}
+
+\begin{proof}
+  We argue by contradiction and assume there is some set $S \subset \R$ with $S \ne \emptyset$ that is both open and closed.
+
+  Note that $S$ contains all of its limit points since $S$ is a closed set (see Theorem~5.10).
+  Also, because $S$ is also open, it can be written as a (countable) union of \emph{disjoint} open intervals (by Theorem~5.5)
+  \begin{equation}\label{eq:s-cover} S = \bigcup_{n = 1}^{\infty}S_{n}. \end{equation}
+
+  Since $S \ne \R$, we know there must be at least one of these intervals (which we shall call $S_{n}$ for some $n \in \N$)
+  nonempty and bounded above or below. Without loss of generality, assume that $S_{n}$ is bounded above by $\alpha$,
+  since an almost identical argument is used if there only exists an $S_{n}$ with an extant infimum.
+  Therefore, $S_{n}$ can be written as
+  \[ S_{n} = (x, \alpha) \]
+  with $x < \alpha$, but may not be finite.
+
+  Now, we know that since $S_{n}$ is an open interval, $\sup S_{n} = \alpha$ is a limit point of $S_{n}$
+  (and therefore $S$) but is not contained within $S_{n}$ due to the definition of an open interval.
+  Therefore, by Theorem~5.10 there must be some $k \ne n$ such that $\alpha \in S_{k}$.
+
+  Let $\alpha \in S_{k}$, and since $S_{k}$ is an open interval, there exists some $\eps > 0$ such that
+  \[ (\alpha - \eps, \alpha + \eps) \subseteq S_{k}. \]
+  Note also that this means $\alpha - \eps/2 \in S_{k}$.
+  This results in a contradiction however, since there would then be
+  \[ \alpha - \frac{\eps}{2} \in (x, \alpha) = S_{n} \quad\text{ and }\quad \alpha - \frac{\eps}{2} \in S_{k}. \]
+  This is a contradiction to the requirement that the open intervals described by~\eqref{eq:s-cover} be disjoint.
+  Thus, we reach a contradiction and know $S$ cannot be clopen.
+\end{proof}
+
+Reason this does not disprove for $\R$ or $\emptyset$ is because neither have a supremum or infimum with which to base this proof from.
+
+\vspace{1.5cm}
+(Previous explanation commented out, don't worry Sam)
+
+% Previous explanation:
+% Note that this does not contradict the fact $\emptyset$ is clopen, since there is no $s \in \emptyset$ that could be used to reach the previous
+% conclusion.
+% Similarly, it doesn't prove that $\R$ is not clopen, as $\R = (-\infty, \infty)$ is the disjoint union of sets (with the rest being $\emptyset$).
+% Thus, there could not be another $S_{k} \ne S_{n}$ to find the contradiction to the disjointedness of the sets.
+
+\end{document}

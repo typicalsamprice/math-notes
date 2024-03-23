@@ -1,0 +1,231 @@
+\documentclass{article}
+
+\input{template}
+
+\author{Sam Price}
+%\date{}
+\title{Homework \#1}
+
+\begin{document}
+
+\maketitle
+
+\begin{enumerate}
+
+        \item Get all these suprema and infima done!
+        \begin{enumerate}
+
+            \item This will be for both $\OpenInt{0, 1}$ and $\ClosedInt{0, 1}$.\\
+                Let $A = \OpenInt{0, 1}$ and $B = \ClosedInt{0, 1}$. A viable lower bound for
+                both sets is 0, since $0 \le x$ for all $x \in A$ and $x \in B$.
+                If 0 is \textit{not} the infimum, then there exists some $\alpha > 0$ such that $\alpha \le x$ for all $x$ in $A$ and $B$.
+                However, for any $\alpha > 0$, we know $0 < \alpha/2 < \alpha$ and $\alpha/2 \in A$. Thus, there cannot be some $\alpha > 0$
+                such that $\inf A = \alpha$. This is also true of $\inf B$, which is trivially the same where 0 takes the equality branch.
+
+                The suprema for $A$ and $B$ is similarly checked. We know by simple checking that 1 is \textit{an} upper bound for both sets.
+                Suppose that $\sup A = \alpha < 1$ and that $\eps = 1 - \alpha > 0$.
+                This cannot be an upper bound however, since $\alpha + \eps/2 \in A$ and is greater than $\alpha$.
+                Thus, $\sup A = \sup B = 1$.
+
+                To justify doing both at once, we can see that $A \union \set{0, 1} = B$, or that $\set{0, 1} \subset B$.
+                This means that we aren't adding any numbers ``in between'' other than those explicitly listed, which won't disrupt the integrity
+                of the justifications.
+
+          \item $A = \set{2/n : n \in \N}$.\\
+                This one is similar to the one in class, but each element is twice its previous ``corresponding'' element.
+                The supremum is trivially 2, since $2/x \to 0$ as $x \to \infty$ and $2 \le 2$.
+
+                For the greatest lower bound, we know 0 is a possibility since every element of $A$ is positive.
+                Let us assume there is some greater lower bound however, such that $\inf A = \eps > 0$.
+                Since $\eps > 0$ however, we can find some $n \in \N$, $1/n < \eps/2 \implies 2/n < \eps$.
+                This shows that there is an element in $A < \eps$, meaning there cannot be a greater lower bound and that $\inf(A) = 0$.
+
+          \item $A = \OpenInt{0, 1} \union \set{2}$.\\
+                This has the exact same infimum as described in $(a)$, so the point will not be belabored.
+                For the supremum, we know $2 \ge 2$, so 2 is a candidate, and is a clear upper bound for $\OpenInt{0, 1}$.
+                The fact there are no lesser upper bounds is left as a check for the reader,
+                since it seems clear at this point $\sup(A) = 2$.
+
+          \item $A = \set*{\frac{1}{n} - \frac{2}{m} : n, m \in \N}$.\\
+                The upper bound of 1 is a clear contender for $\sup A$, since $2/m > 0$ and $1/n \le 1$, we know 1 is greater than
+                every element in $A$. Suppose the true supremum of $A$ is some $\alpha = 1 - \eps$ where $\eps > 0$.
+                We could then take $n = 1$, and find some $m$ such that $2/m < \eps$. Since this is within $A$ but greater than $\alpha$,
+                such an $\alpha \ne \sup A$. Thus, we can say $\sup A = 1$.
+
+                One valid value for $\inf A$ is -2. Such a number cannot be achieved (or exceeded), but
+                can be clearly approached with $\lim_{n \to \infty} (1/n - 2) = -2$ and $m = 1$.
+                Suppose $\inf A > -2$, and that such an infimum is $\alpha$ and that $\eps = -2 - \alpha > 0$.
+                By letting $m = 1$ (to maximize said term), we can find a sufficiently large $n$
+                such that $0 < 1/n < \eps$. By the property of the denseness of $\Q$ (and $\R$), there exists such an $n \in \N$.
+                Therefore, $1/n - 2 < \alpha$ but is still within $A$. Thus, we can say $\inf A = -2$.
+        \end{enumerate}
+
+  \item Assume $A \subseteq B$ are both bounded above (sufficiently, $B$ is). Prove that $\sup A \le \sup B$.
+        \begin{proof}
+          Suppose not, and that $\sup B < \sup A$. Thus, we can say there exists some $x \in A$ such that $\sup B < x \le \sup A$.
+          However, since $A \subseteq B$, we know that $x \in B$, and therefore $\sup B < x$ is a contradiction to our original assumption.
+          Thus, $A \subseteq B \implies \sup A \le \sup B$.
+        \end{proof}
+
+  \item Suppose $A \subset \R$ has a maximal element $M \in A$. Likewise, suppose $B \subset R$
+        has a minimal element $m \in B$.
+        \begin{enumerate}
+          \item Prove that $\sup A = M$.
+                \begin{proof}
+                  Clearly, $\sup A \not > M$, since otherwise $M < \sup A$ is a lesser upper bound.
+                  Suppose not, and that $\sup A < M$. Then, $M \in A$ would be impossible, as $M > \sup A \ge M$ is a contradiction.
+                  Therefore, $\sup A = M$.
+                \end{proof}
+          \item Prove that $\inf B = m$.
+                \begin{proof}
+                  Clearly, $\inf B \not < m$, since otherwise $m > \inf B$ is a greater lower bound.
+                  Suppose not, and that $\inf B > m$. Then we would find that $m < \inf B \le m$, which is an impossibility.
+                  Therefore, $\inf B = m$.
+                \end{proof}
+        \end{enumerate}
+
+  \item Suppose $A$ is a nonempty set containing some finite number of elements. Prove that $A$ has a maximal element,
+        and that $\max(A) \in A$.
+        \begin{proof}
+          Let $A$ contain 1 element. Since there is only one element, said element is clearly maximal \textit{and} contained
+          within $A$. Let us assume then, that if $\abs{A} = n \in \N$, then it has some maximal element $a \in A$.
+
+          Now for the case of $\abs{A} = n + 1$, we have two scenarios: either the maximal element is within the first $n$
+          elements, in which case by our hypothesis said maximal element $a \in A$, or it is the $n$+1\textsuperscript{th} element, where
+          it is greater than every other $a \in A$ and thus is the maximal element contained within $A$.
+        \end{proof}
+
+  \item Suppose $A \subset \R$ is bounded above and $c \in \R$. Define $c + A = \set{c + a : a \in A}$
+        and $cA = \set{ca : a \in A}$.
+        \begin{enumerate}
+          \item Prove $\sup(c + A) = c + \sup(A)$.
+                \begin{proof}
+                  Let $\beta = \sup(A)$. Notice that for $c + A$, $c + \beta$ is an upper bound, since
+                  for any $a \in A$, $a \le \beta \implies a + c \le \beta + c$.
+                  Since $\beta - \eps < a$ for some $a \in A$ given any $\eps > 0$,
+                  it follows that $\beta - \eps + c < a + c$. Thus, there cannot be a lesser upper bound
+                  for $\sup(c + A)$, and $\sup(c + A) = c + \sup(A)$.
+                \end{proof}
+
+          \item Discern the necessary and sufficient (if and only if) conditions such that $\sup(cA) = c\sup(A)$.
+                Also give an example of some $c, A$ such that $\sup(cA) \ne c \sup A$.
+
+                The condition holds if $c \ge 0$ or $\abs{A} \le 1$.
+                \begin{proof}
+                  Firstly, $\abs{A} \le 1$ must imply $c\sup(A) = \sup(cA)$.
+                  This is because if $A$ is empty, then there is no supremum for $A$ nor $cA$.
+                  So, consider the case $\abs{A} = 1$.
+                  Since the only element of $A$ \textit{is} the supremum, it must be equal to its multiple of $c$
+                  no matter which order the ``operations'' are applied.
+                  That is, $c \sup(\set{x}) = cx = \sup(\set{cx})$.\\
+
+                  Now, $c \ge 0$ must also imply the identity is true. Let $\beta = \sup(A)$, and consider the set $cA$.
+                  The value $c\beta$ \textit{is} an upper bound, since for each element $ca$ in $cA$, $c\beta$ is greater.
+                  This is because $c \ge 0$, and $a \le \beta \implies ca \le c\beta$.\\
+
+                  Considering any lower upper bounds, let $\eps > 0$ and $c > 0$ since the case $c = 0$ is trivial.
+                  The value $c\beta - \eps$ cannot be an upper bound of $cA$ however,
+                  since for some $a \in A$:
+                  \begin{equation*}
+                    \frac{c\beta - \eps}{c} = \beta - \frac{\eps}{c} < a.
+                  \end{equation*}
+                  With the rightmost inequality being true by the definition of the supremum.
+                  This means that $ca > c\beta - \eps$, and is a contradiction to the definition of the supremum
+                  and our assumption of some lesser upper bound,
+                  therefore $c\sup(A) = c\beta = \sup(cA)$.\\
+
+                  Now, to prove the other direction let us consider the contrapositive.
+                  Let $c < 0$ and $\beta = \sup(A)$ where $\abs{A} > 1$.
+                  Take two elements $x, y \in A$ such that $x < y \le \beta$.
+                  Now, $x < y \le \beta \implies c\beta \le cy < cx$ since $c < 0$.
+                  Thus, $c\beta < cx$, and therefore $c\sup(A) = c\beta \ne \sup(cA)$.
+                  More specifically, $c\sup(A) < \sup(cA)$ in this case.
+                \end{proof}
+
+
+                Counterexample: $A = \set{1, 2, 3}$ and $c = -1$, where $\sup(cA) = -1$ and $c \sup A = -3$.
+        \end{enumerate}
+
+
+  \item For $A \subseteq \R$, we denote $-A$ to be the set
+        \begin{equation*}
+          -A = \set{ -x: x \in A }.
+        \end{equation*}
+
+        Suppose $A \ne \emptyset$ and that $A$ is bounded below.
+        Prove that $-A \ne \emptyset$, $-A$ is bounded above,
+        and that $\sup(-A) = -\inf(A)$.\\
+
+        The first requirement is obvious, and won't be put in its own proof-box.
+        Simply put, there is the trivial bijection between $A$ and $-A$ (the negation of each element, and 0 mapped to itself) and thus
+        $0 < \abs{A} = \abs{-A} > 0$.
+        (AN:\ I feel very satisfied knowing this is the formal definition of equal cardinality as well.
+        After: This felt much cooler before you went over the definition in class, but hey-ho that's how it goes.)
+
+        \begin{proof}[Upper bound of $-A$]
+          Suppose for the sake of contradiction that $-A$ is \textit{not} bounded above.
+          This means that for any $n \in \N$, an element $a$ can be found in $-A$ such that $a > n$.
+          Thus, when we take the set $-(-A)$, this gives us
+          \begin{equation*}
+            -(-A) = \set{ -(-x) : x \in A } = \set{ x : x \in A } = A.
+          \end{equation*}
+
+          Since $-A$ is not bounded above, we can find arbitrarily large (negative) values in $-(-A)$ (and therefore $A$). However, this
+          is a contradiction since we know $A$ is bounded below.
+        \end{proof}
+
+        \begin{proof}[Value of $\sup(-A)$]
+          Firstly, suppose $\beta = \sup(-A)$ and that $\gamma = \inf(A)$.
+          We (now) know that both of these values exist, since $A$ is bounded below and $-A$ above.
+
+          Note first that $-\gamma$ is a known upper bound, since if $\gamma \le a$ for all $a \in A$,
+          this also means that $-\gamma \ge -a \implies -\gamma \ge \beta$. Assume that $\beta < -\gamma$.
+
+          However, $\beta$ is then not a possible upper bound since for any $\eps > 0$, $\gamma + \eps > a$ for some $a \in A$.
+          Following this, $-\gamma - \eps < a$ for some $a \in -A$ and thus choosing $\eps = -\gamma - \beta$:
+          \begin{equation*}
+            \beta = -\gamma - \eps < a.
+          \end{equation*}
+
+          However, $\beta < a$ means that $\beta$ is \textit{not} an upper bound on $-A$, and
+          therefore we can conclude that $-\gamma$ is an upper bound and in fact the least upper bound, meaning $\beta \ge -\gamma$,
+          and then that $\sup(-A) = -\inf(A)$.
+        \end{proof}
+
+  \item Let $x, y \in \R$. Prove that if $x < y + \eps$ for all $\eps > 0$, then $x \le y$.
+        Conclude that if $\abs{x - y} < \eps$ for all $\eps > 0$, then $x = y$. Does the proof work if $<$ is replaced by $\le$?\\
+
+        To answer the second point first, with the initial proof being sort of lemma'd in, we can say \textit{yes}, it in fact does work.
+        \begin{proof}
+          Let $x, y \in \R$ such that $\abs{x - y} \le \eps$ for all $\eps > 0$. Suppose that $\abs{x - y} = \eps$ for some such $\eps$.
+          Thus, we could say that
+          \begin{equation*}
+            \abs{x - y} = \eps > \frac{\eps}{2} \implies \abs{x - y} > \frac{\eps}{2}.
+          \end{equation*}
+
+          This however would be a contradiction to the \textit{all} quantifier for $\eps$ since $\eps/2 > 0$ as well.
+          As such, $<$ is equivalent to $\le$ since equality can never happen.
+        \end{proof}
+
+        Now, the first proof and its corollary.
+        \begin{proof}
+          Let $x, y \in \R$ such that $x < y + \eps$ for all $\eps > 0$.
+          Suppose that $x > y$.
+          Thus, when $\eps = y - x$, $x = y + \eps$. However, $x = y + \eps$ is a contradiction to $x < y + \eps$,
+          since equality disobeys the $<$ relation.
+          Thus, $x \not> y$, and in fact $x \le y$.
+        \end{proof}
+
+        \begin{proof}[Corollary]
+          Let $x, y \in \R$ such that $\abs{x - y} < \eps$ for all $\eps > 0$.
+
+          To first take $x - y \ge 0$, then $\abs{x - y} = x - y < \eps$. By the above theorem,
+          we see that since $x < y + \eps$, then $x \le y$.
+
+          Similarly, when $x - y < 0$, then $\abs{x - y} = y - x$. In the same style of argument,
+          notice that this implies $y \le x$. The only time $x \le y$ and $x \ge y$ is when $y = x$,
+          and thus $\abs{x - y} < \eps$ for all $\eps > 0$ necessitates that $x = y$.
+        \end{proof}
+\end{enumerate}
+
+\end{document}

@@ -1,0 +1,45 @@
+% -*- compile-command: "latexmk -pdf document.tex" -*-
+\documentclass{article}
+
+\input{template}
+
+\author{Sam Price}
+\title{Presentation for Ex. 1.34\\\Large{Retry}}
+
+\begin{document}
+
+\maketitle
+
+Let $I_{n} = \bracks*{a_{n}, b_{n}}$ where for every $n \in \N$ there is
+\[ I_{n} \supseteq I_{n + 1}. \]
+We wish to show \[ \bigcap_{n = 1}^{\infty}I_{n} \ne \emptyset. \]
+
+\begin{proof}
+Let $(a_{n})$ and $(b_{n})$ be the sequences defining the bounds of $I_{n}$.
+Let $\alpha = \sup\braces*{a_{n}}$ and $\beta = \inf\braces*{b_{n}}$.
+Then, we know
+\[ a_{1} \le a_{2} \le \ldots \le a_{n} \le \ldots \le \alpha \overbrace{ \le }^{?} \beta \le \ldots \le b_{n} \le \ldots \le b_{2} \le b_{1}. \]
+Note that this proof \emph{does} use both $\alpha$ and $\beta$, since I was unsure how to go about showing
+\[ \alpha \le b_{n} \quad \forall n \in \N, \]
+since that seems to require showing the infimum of $(b_{n})$ is greater than (or equal to) $\alpha$.\\
+
+\noindent
+Assume for the sake of contradiction that $\alpha > \beta$. Then, we would find (by the ``no-gap lemma'') $\eps = \alpha - \beta > 0$ and see $\exists a_{n}$
+such that $a_{n} > \alpha - \eps$. Similarly, there would be a $b_{n} < \alpha - \eps$. Then, we see
+\[ a_{n} > \alpha - \eps > b_{n} \implies a_{n} > b_{n}. \]
+This is a contradiction, and so $\alpha \le \beta$.
+
+\noindent
+If ever $a_{n} = b_{n}$, then for all $m \ge n$, we see
+\[ a_{m} = b_{m} = a_{n} \]
+and this would also mean $\alpha = \beta = a_{n}$, and even that
+\[ \bigcap_{n = 1}^{\infty}I_{n} = \set*{\alpha}. \]
+
+\noindent
+Now, if $a_{n} \ne b_{n}$ for all $n$, we then would see that because of the inherent definition of $\alpha$ and $\beta$ and the fact $\alpha \le \beta$,
+\[ \bigcap_{n = 1}^{\infty}I_{n} = \bracks{\alpha, \beta} \ne \emptyset. \]
+More precisely, $\abs*{\bracks{\alpha, \beta}} = \abs*{\R}$, which is \emph{slightly} more than zero.
+
+\end{proof}
+
+\end{document}

@@ -1,0 +1,113 @@
+% -*- compile-command: "latexmk -pdf document.tex"; -*-
+\documentclass{article}
+
+\input{template}
+
+\author{Sam Price}
+\date{}
+\title{Preview Assignment 5\\\Large{Math 301}}
+
+\begin{document}
+
+\maketitle
+
+\begin{enumerate}
+
+\item Consider the set $A = (2, 5)$.
+        \begin{enumerate}
+          \item\label{ii:first-of-a} From the textbook, is this set open? closed? both? neither? You do not need to prove it.
+
+                This set is open.
+
+          \item Consider $3 \in A$. What is a possible choice of $\delta > 0$ such that $N_{\delta}(3) \subseteq A$?
+
+                $\delta = 1$ works.
+
+          \item Consider $4 \in A$. What is a possible choice of $\delta > 0$ such that $N_{\delta}(4) \subseteq A$?
+
+                $\delta = 1$ also works, since $(3, 5) \subseteq (2, 5)$.
+
+          \item Consider $4.99999 \in A$. What is a possible value of $\delta > 0$ such that $N_{\delta}(4.99999) \subseteq A$?
+
+                $\delta = 10^{-10}$ is a possible value.
+        \end{enumerate}
+
+
+
+
+
+  \item Now consider the set $B = \lparen 2, 5 \rbrack$. Repeat Question~\ref{ii:first-of-a} for this set. Is there any choice of $\delta > 0$ for which $N_{\delta}(5) \subseteq B$? Justify your answer.
+
+        The set $B$ is neither open nor closed. Not open because uh\ldots, see the second part of this. $B$ is not closed because
+        $\comp{B} = \lparen -\infty, 2 \rbrack \union (5, \infty)$ which is not itself open either.
+
+        Now, there does \emph{not} exist such a $\delta > 0$ where $N_{\delta}(5) \subseteq B$,
+        since we would have $5 < 5 + \delta/2 \in N_{\delta}(5)$.
+
+
+
+
+
+  \item Write down the definition of a \emph{limit point} verbatim from the textbook.
+
+        A point $x$ is a \emph{limit point} of a set $A$ if there is a sequence of points $a_{1}, a_{2}, a_{3}, \ldots$
+        from $A \setminus \set{x}$ such that $a_{n} \to x$.
+
+        Note: As a ``\emph{UWW Limit Point}'', we accept $(x, \ldots) \to x \in A$.
+
+
+
+
+
+  \item Use the definition above and Theorem 1.24 (the no-gap lemma) to prove the following:
+
+        (Yes, the numbering isn't by section but that's okay.)
+        \begin{prop} Let $A$ be a bounded nonempty subset of $\R$. Then $\sup(A)$ and $\inf(A)$
+          are limit points of $A$.\end{prop}
+
+        Let us split this into two parts, one for the supremum and the other for the infimum case.
+        Note also that \emph{both} exist because $A$ is presumed to be bounded and nonempty in the hypothesis.
+
+        \begin{proof}[Supremum]
+          First, if $\sup A \in A$, then we may take the constant sequence $(\sup A) \to \sup A$.
+
+          Now, assume $\sup A \notin A$. Then, $\sup A > a$ for all $a \in A$ and thus by Theorem~1.24
+          there exists an $\eps_{1} > 0$ such that there is an $a_{1} \in A$ where
+          \[ \sup A > a_{1} > \sup A - \eps_{1}. \]
+          Now, we may define $a_{n + 1}$ for each $n \in \N$. Let $\eps_{n + 1} = \sup A - a_{n} > 0$,
+          and then find $a_{n + 1} \in A$ (again by Theorem~1.24) such that
+          \[ \sup A > a_{n + 1} > \sup A - \eps_{n + 1} = a_{n}. \]
+          Hence, we find a sequence $\parens{a_{n}} \subseteq A$ monotonically increasing, bounded above by $\sup A$ which is
+          \emph{by definition} the supremum of this sequence (as $(\eps_{n}) \to 0$)
+          and therefore by MCT converges to $\sup A$.
+        \end{proof}
+
+        \begin{proof}[Infimum]
+          First, if $\inf A \in A$, then we may take the constant sequence $(\inf A) \to \inf A$.
+
+          Now, assume $\inf A \notin A$. Then, $\inf A < a$ for all $a \in A$ and thus by Theorem~1.24
+          there exists an $\eps_{1} > 0$ such that there is an $a_{1} \in A$ where
+          \[ \inf A < a_{1} < \inf A + \eps_{1}. \]
+          Now, we may define $a_{n + 1}$ for each $n \in \N$. Let $\eps_{n + 1} = a_{n} - \inf A > 0$,
+          and then find $a_{n + 1} \in A$ (again by Theorem~1.24) such that
+          \[ \inf A < a_{n + 1} < \inf A + \eps_{n + 1} = a_{n}. \]
+          Hence, we find a sequence $\parens{a_{n}} \subseteq A$ monotonically decreasing, bounded below by $\inf A$ which is
+          \emph{by definition} the infimum of this sequence (as $(\eps_{n}) \to 0$)
+          and therefore by MCT converges to $\inf A$.
+        \end{proof}
+
+
+
+  \item If a set $A$ is bounded, nonempty and both $\sup A \in A$ and $\inf A \in A$, is $A$ necessarily closed?
+
+        No. Consider the set
+        \[ A = \lbrack 2, 5 \rparen \union \lparen 7, 9 \rbrack. \]
+        In this case, $\inf A = 2 \in A$, and $\sup A = 9 \in A$.
+        However,
+        \[ \comp{A} = (-\infty, 2) \union \bracks{5, 7} \union (9, \infty). \]
+        The complement of $A$ is not open (and therefore $A$ is not closed)
+        since for $x \in \set{5, 7} \subset \comp{A}$ there is no $\eps$-neighborhood of $x$ contained within $\comp{A}$.
+
+\end{enumerate}
+
+\end{document}

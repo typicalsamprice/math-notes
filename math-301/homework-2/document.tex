@@ -1,0 +1,215 @@
+% -*- compile-command: "latexmk -pdf document.tex" -*-
+\documentclass{article}
+
+\input{template}
+
+\author{Sam Price}
+\title{Homework 2\\\Large{Math 301}\\\large{Part 2: 4\textendash{}10}}
+
+\begin{document}
+
+\maketitle
+
+% Exs. start page 120 of PDF
+
+\begin{enumerate}
+%\input{part-1}
+%\input{part-2}
+%\input{part-3}
+
+\input{part-4}
+
+  \item Show, directly from the definition, that the sequence given by
+        \[
+        a_{n} = \frac{n + 1}{n} = 1 + \frac{1}{n}
+        \]
+        is Cauchy.\\
+
+        \begin{proof}
+           Let $\eps > 0$. Choose $N$ such that
+           \[
+           \frac{1}{N} < \eps.
+           \]
+           Thus, for all $m > n > N$, we find that
+           \begin{align*}
+           \abs*{a_{n} - a_{m}} &= \abs*{1 + \frac{1}{n} - \parens*{1 + \frac{1}{m}}}\\
+           &= \abs*{\frac{1}{n} - \frac{1}{m}}\\ &< \frac{1}{n} < \frac{1}{N} < \eps.
+           \end{align*}
+           Hence, $(a_{n})$ is Cauchy.
+        \end{proof}
+
+  \item Suppose $(a_{n}) \to a$. Show that the sequence $(b_{n})$ defined by
+        \[
+        b_{n} = \frac{\sum_{i = 1}^{n}a_{i}}{n}
+        \]
+        also converges to $a$.
+
+        The content of this proof has been removed in accordance with our DMCA policy (see note on the Ces\`aro summation proof.)
+        This problem will be submitted alone at a later date possibly. Was not in the mood to rework it at 2:02am.
+
+  \item \begin{enumerate}
+          \item\label{alt-1} Converges by alternating series test, but is not absolutely convergent since $1/\sqrt{k} \ge 1/k$ and the Harmonic Series diverges.
+          \item Diverges. Terms approach $\pm 1$ which is not zeor.
+          \item Absolutely Convergent, geometric sequence where $r = \abs*{(\ln 4)\inv} < 1$
+          \item This is just $e$, and so converges (absolutely).
+          \item This sum can be continuously rewritten such that the $k$th partial sum is equal to $\sqrt{k + 2} - 1$.
+                Since that is unbounded, it must diverge. The indexing is messed up but the errata mentions it so I won't say anything else about that.
+          \item Diverges, every term is a constant greater than zero.
+          \item Converges, since each term goes to 0 while alternating much like part (a).
+          \item Looking at the function corresponding to each term, we see (noting that $\ln \ln 53 \approx 3.7$)
+                \[
+                \odf{x}\parens*{\frac{\ln x}{\ln \ln x}} = \frac{\ln(\ln(x)) - 1}{x \ln^{2}(\ln(x))} > 0 \quad \forall x \ge 53.
+                \]
+                Since each term is only growing, it must diverge.
+          \item This must diverge since for $n \ge 7$ each term is greater than the same term from the Harmonic series, meaning the ``sum''
+                is greater than it. Since it diverges, so must this series.
+        \end{enumerate}
+
+  \item Given a series $\displaystyle \sum_{k = 1}^{\infty}a_{k}$ with $a_{k} \ne 0$, assume that
+        \[ r := \lim_{k \to \infty} \abs*{\frac{a_{k + 1}}{a_{k}}} < 1. \]
+        \begin{enumerate}
+          \item Let $q \in \R$ such that $r < q < 1$. Explain why there is some $N$ such that $n \ge N$ implies
+                that $\abs{a_{n + 1}} \le \abs{a_{n}} \cdot q$.
+
+                Let $\eps > 0$, and note that if we have the above limit defining $r$, there is the sequence
+                \[ \frac{\abs{a_{n + 1}}}{\abs{a_{n}}} \]
+                that must converge to $r$. Therefore, we can say there exists an $N$ such that
+                \[ \abs*{\frac{\abs{a_{n + 1}}}{\abs{a_{n}}} - r} < \eps \ \parens*{\le \eps} \quad \forall n \ge N. \]
+                Then, deconstructing the absolute value, we find
+                \[
+                r -\eps < \frac{\abs{a_{n + 1}}}{\abs{a_{n}}} \le r + \eps.
+                \]
+                Choosing $\eps = q - r > 0$, we will then uncover for $n \ge N$ (for an appropriate such $N$),
+                \[
+                \frac{\abs{a_{n + 1}}}{\abs{a_{n}}} \le r + (q - r) = q \implies \abs{a_{n + 1}} \le \abs{a_{n}} \cdot q.
+                \]
+                Further, for $k \in \N \union \set{0}$ and $n \ge N$ we see that
+                \begin{equation}\label{eq:pow-qk} \abs{a_{n + k}} \le \abs{a_{n}} \cdot q^{k}. \end{equation}
+
+          \item Explain why $\sum_{k = 1}^{\infty}\abs{a_{N}} \cdot q^{k}$ must converge.\\
+                This is a geometric sequence with a common multiple of $q$. Namely,
+                \[ \sum_{n = 1}^{\infty}\abs{a_{N}}q^{n} = \frac{\abs{a_{N}}}{1 - q} - \abs{a_{N}} = \frac{\abs{a_{N}}\cdot q}{1 - q}. \]
+          \item Use part (b) to prove that $\sum\abs{a_{k}}$ converges.
+
+                Note that we can see given our $N$ from part (a)
+                \[
+                \sum_{n = 1}^{\infty}\abs{a_{n}} = \parens*{\sum_{n = 1}^{N - 1}\abs{a_{n}}} + \parens*{\sum_{n = N}^{\infty}\abs{a_{n}}}.
+                \]
+                Using our $q \in (r, 1)$ and geometric series from part (b), we can find
+                \begin{align*}
+                  \sum_{n = 1}^{\infty}\abs{a_{n}} &= \parens*{\sum_{n = 1}^{N - 1}\abs{a_{n}}} + \parens*{\sum_{n = N}^{\infty}\abs{a_{n}}}\\
+                  &\le \parens*{\sum_{n = 1}^{N - 1}\abs{a_{n}}} + \parens*{\sum_{n = N}^{\infty}\abs{a_{N}}q^{n}} \quad \textrm{ by~\eqref{eq:pow-qk} }\\
+                  &\le \parens*{\sum_{n = 1}^{N - 1}\abs{a_{n}}} + \frac{\abs{a_{N}} \cdot q}{1 - q}.\\
+                \end{align*}
+                This last sum is clearly a finite number, say $V$, and thus $\sum\abs{a_{n}} \le V$ implies that the series itself
+                is convergent (and the original series $\sum a_{k}$ $\therefore$ being absolutely convergent).
+        \end{enumerate}
+
+  \item A series $\displaystyle\sum_{n = 1}^{\infty}a_{n}$ is said to be \emph{Ces\`aro summable} if the limit
+        \[ \lim_{n \to \infty} \frac{s_{1} + \cdots + s_{n}}{n} \]
+        exists, with $s_{n}$ denoting the $n$\textsuperscript{th} partial sum.
+        \begin{enumerate}
+          \item Prove that convergence implies Ces\`aro summability.
+
+                I realize now, in the early morning hours of March 4\textsuperscript{th} after all of this is done,
+                that problem 6 is literally this exact idea basically. Even moreso, that means I did number six wrong, since it would only work
+                if the entire sequence in that scenario was positive.
+                \begin{proof}
+                  Let $\eps > 0$ and $(s_{n}) \to s$ be the partial sums of a convergent series.
+                  Now, let $(c_{n})$ be the sequence of the averages of the first $n$ partial sums, defined by
+                  \[ c_{n} = \frac{1}{n}\sum_{i = 1}^{n}s_{i}. \]
+                  There is the sequence $(\delta_{n})$ as well which is
+                  \[ \delta_{n} = s_{n} - s. \]
+                  With the idea that $(\delta_{n}) \to 0$ (equivalent to $(s_{n}) \to s$, but will be easier for me to track).
+                  Choose $N$ such that for $n > N$ we have
+                  \[ \abs{\delta_{n}} < \frac{\eps}{3}. \]
+                  Notice then that for $n > N$ there is
+                  \begin{align*}
+                    c_{n} &= \frac{s_{1} + \cdots + s_{N}}{n} + \frac{s_{N + 1} + \cdots + s_{n}}{n}\\
+                    &= \frac{s_{1} + \cdots s_{N}}{n} + \frac{\delta_{N + 1} + \cdots + \delta_{n}}{n} + \frac{n - N}{n}s.
+                  \end{align*}
+                  Note the extra term that is a multiple of $s$ to balance out the extra subtracted terms within elements of $(\delta_{n})$.
+
+                  Using this, we find that
+                  \begin{align*}
+                    \abs*{c_{n} - s}
+                    &= \abs*{\frac{s_{1} + \cdots + s_{N}}{n} + \frac{\delta_{N + 1} + \cdots + \delta_{n}}{n}
+                      + \frac{n - N}{n}s - s}\\
+                    &\le \frac{\abs*{s_{1} + \cdots + s_{N}}}{n} + \frac{\abs{\delta_{N + 1} + \cdots + \delta_{n}}}{n}
+                      + \frac{N}{n}\abs{s}\\
+                    &\le \frac{\abs*{s_{1} + \cdots + s_{N}}}{n} + \frac{\abs{\delta_{N + 1}} + \cdots + \abs{\delta_{n}}}{n}
+                      + \frac{N}{n}\abs{s}\\
+                    &< \frac{\abs*{s_{1} + \cdots + s_{N}}}{n} + \frac{n - N}{n}\cdot\frac{\eps}{3}
+                      + \frac{N}{n}\abs{s}\\
+                  \end{align*}
+                  Now, if we take $M > N$ large enough such that
+                  \[ \frac{1}{M} < \frac{\eps}{3\abs*{s_{1} + \cdots + s_{N}}} \]
+                  and
+                  \[ \frac{1}{M} < \frac{\eps}{3N\abs{s}}, \]
+                  we find for $n > M > N$ there is
+                  \begin{align*}
+                    \abs{c_{n} - s} &< \frac{\abs{s_{1} + \cdots + s_{N}}}{n} + \frac{n - N}{n}\cdot\frac{\eps}{3} + \frac{N}{n}\abs{s}\\
+                    &< \frac{\eps}{3} + \frac{\eps}{3} + \frac{\eps}{3} = \eps.
+                  \end{align*}
+                  Thus, convergence implies Ces\`aro-summability.
+                \end{proof}
+
+          \item Give an example of a Ces\`aro-summable series that does not converge.
+
+                The simplest answer which feels unfair is the infamous Grandi's series, which is
+                \[ \sum_{n = 1}^{\infty}\parens*{-1}^{n - 1} = 1 - 1 + 1 - 1 + 1 - \cdots \]
+                where the Ces\`aro sum is simply $\ds\frac{1}{2}$. This is because
+                \[
+                \lim_{n \to \infty}\frac{1 + 0 + 1 + 0 + \cdots}{n} = \lim_{n\to\infty}\frac{n/2}{n} = \frac{1}{2}.
+                \]
+        \end{enumerate}
+
+  \item Prove that if an absolutely convergent series $\ds\sum a_{k} = a$ is unconditionally convergent to $a$.
+
+        \begin{proof}
+          Let the series $\ds\sum_{k = 1}^{\infty}a_{k} = a$, and $\ds\sum_{k = 1}^{\infty}\abs{a_{k}}$ is finite.
+          Let $\eps > 0$, and since this series is absolutely convergent there exists an $N$ where for all $n \ge N$ we have both
+          \begin{equation}\label{abs-conv-defn}
+            \abs*{\sum_{k = 1}^{n}a_{k} - a} < \frac{\eps}{2} \quad \textrm{ and } \quad \sum_{k = n}^{\infty}\abs{a_{k}} < \frac{\eps}{2}.
+          \end{equation}
+          Note that the $N$ may not be minimal for either case, but taking the greater of the two minimal $N$s lends us to the
+          above condition. Now, let $\pi$ be a permutation of $\N$ and $\ds\sum_{k = 1}^{\infty}a_{\pi(k)}$ be a rearrangement of the series.
+          Choose some $M \ge N$ large enough such that
+          \[ \set*{a_{1}, \ldots, a_{N}} \subseteq \set*{a_{\pi(1)}, \ldots, a_{\pi(M)}}. \]
+          Note that this $M$ must be finite since $\pi$ cannot permute any natural number to something semantically
+          suspicious such as ``second to last''.
+
+          We then see for $n > M$
+          \begin{equation}\label{ineq-permuted-to-M} \sum_{k = 1}^{N}a_{k} \le \sum_{k = 1}^{n}a_{\pi(k)}. \end{equation}
+          Let $D = \pi\inv(\set{1, \ldots, N})$, and we see that in fact the extra indices (pre-permutation)
+          included in the permuted sum to $M$ is
+          \[ I = \set*{1, \ldots, n} \setminus D. \]
+          Notice by the definition of $I$ and $D$ there are the equalities
+          \begin{align}
+            \sum_{i \in I}a_{\pi(i)} + \sum_{i \in D}a_{\pi(i)} = \sum_{k = 1}^{n}a_{\pi(k)}. \label{split-permuted-full-sum}\\
+            \sum_{i \in D}a_{\pi(i)} = \sum_{k = 1}^{N}a_{k}. \label{sum-over-D-eq-up-to-N}
+          \end{align}
+
+          Now, let $S$ and $T$ be the minimum and maximum values of $\pi(I)$ respectively.
+          Using these, we find
+          \begin{align*}
+            \abs*{\sum_{i \in I}a_{\pi(i)}} &\le \sum_{i \in I}\abs*{a_{\pi(i)}}\\
+            &\le \sum_{k = S}^{T}\abs*{a_{k}}\quad \textrm{ because the permuted values of } \pi(I) \subseteq \set*{S, \ldots, T}.\\
+            &\le \sum_{\mathclap{ k = N }}^{\infty}\abs*{a_{k}} \quad \textrm{ since } S > N \textrm{ and clearly } T < \infty.\\
+            &< \frac{\eps}{2} \quad \textrm { by~\eqref{abs-conv-defn} }.
+          \end{align*}
+          Now, to show that $\sum_{k = 1}^{\infty}a_{\pi(k)} = a$:
+          \begin{align*}
+            \abs*{\sum_{k = 1}^{n}a_{\pi(k)} - a}
+            &= \abs*{\sum_{i \in D}a_{\pi(i)} + \sum_{i \in I}a_{\pi(i)} - a} \quad \textrm{ with~\eqref{split-permuted-full-sum} }\\
+            &\le \abs*{\sum_{i \in D}a_{\pi(i)} - a} + \abs*{\sum_{i \in I}a_{\pi(i)}}\\
+            &< \abs*{\sum_{i \in D}a_{\pi(i)} - a} + \frac{\eps}{2}\\
+            &=\abs*{\sum_{k = 1}^{N}a_{k} - a} + \frac{\eps}{2} \quad \textrm{ by~\eqref{sum-over-D-eq-up-to-N} }\\
+            &< \frac{\eps}{2} + \frac{\eps}{2} \quad \textrm{ by~\eqref{abs-conv-defn} }\\
+            &= \eps.
+          \end{align*}
+          Thus, absolutely convergent series are also unconditionally convergent in $\R$.
+        \end{proof}
+\end{enumerate}
+
+\end{document}

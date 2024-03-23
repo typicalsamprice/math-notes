@@ -1,0 +1,17 @@
+  \item Assume $(a_{n})$ is bounded and $(b_{n}) \to 0$. Show that $(a_{n}b_{n}) \to 0$.
+        \begin{proof}
+          Since $(a_{n})$ is bounded, $\abs{a_{n}} < C$ for all $n$ (where $C$ is not minimal, but \textit{is} finite).
+          The reason $<$ is the proper relation here instead of $\le$ is to avoid dividing by zero.
+          Then, we see
+          \[
+            \abs*{a_{n}b_{n}} = \abs{a_{n}}\abs{b_{n}} \le C\abs*{b_{n}}.
+          \]
+
+          Let $\eps > 0$, and note that $\eps/C > 0$ also. Choose $N$ so that $\abs{b_{n}} < \eps/C$ for all $n > N$.
+          Then for $n > N$,
+          \[
+            \abs*{a_{n}b_{n} - 0} < \abs*{Cb_{n}} = C\abs*{b_{n}} < C \cdot \frac{\eps}{C} = \eps
+          \]
+
+          Thus, $(a_{n} \cdot b_{n}) \to 0$ as well.
+        \end{proof}
