@@ -1,2 +1,9 @@
 **/template.tex
 **/.auctex-auto
+
+**/*.log
+**/*.pdf
+**/*.aux
+**/*.dvi
+**/*.fls
+**/*.fdb_latexmk
