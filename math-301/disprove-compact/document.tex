@@ -36,46 +36,40 @@ with $\varphi$ being Euler's totient function.
 
 
 \section{Definitions \& Notation}
-In this article, let $\frac{p}{q}_{\gamma} = q$, for any rational $p/q$ in canonical form.
+In this article, let $\parens*{\frac{p}{q}}_{\gamma} = q$, for any rational $p/q$ in canonical form.
 
 For any rational $r \in S$, let us denote
 \[ U_{r} = \parens*{r - \Rt{r_{\gamma}}, r + \Rt{r_{\gamma}}} \]
-and note that $U_{r} \ne \emptyset$ for any $r$. We will also use the fact that
-\[ \sup U_{r} - \inf U_{r} = \frac{2}{10^{\gamma(r)}}. \]
-
-Let us also use the notation $F_{n}$ for \emph{Farey sequences}, or the set of all rationals
-on the unit interval (also $S$, in this case) with denominators less than or equal to $n$ (with $n \in \N$, naturally).
-For instance, we see
-\[ F_{3} = \set*{\frac{0}{1}, \frac{1}{3}, \frac{1}{2}, \frac{2}{3}, \frac{1}{1}}. \]
-I derived this myself, but also found out later I was right in that
-\[ \abs{F_{n}} = \Phi(n) + 1 \]
-with $\Phi$ being the summatory totient function.
-
-\section{Lemmas}
-
-\begin{lem}
-  If $r, s \in S$ and $r \in U_{s}$, then $r_{\gamma} > s_{\gamma}$.
-\end{lem}
-\begin{proof}
-  Let $r, s \in S$ such that $r \in U_{s}$. For the sake of contradiction, suppose $r_{\gamma} \le s_{\gamma}$.
-  Now, since $r \in U_{s}$, we know
-  \[ s - \Rt{s_{\gamma}} < r < s + \Rt{s_{\gamma}}. \]
-  Since $r_{\gamma} \le s_{\gamma}$, we know $2/10^{s_{\gamma}} < 1/10^{r_{\gamma}}$. Therefore, $U_{s} \subset U_{r}$.
-\end{proof}
+and note that $U_{r} \ne \emptyset$ for any $r$.
 
 \section{Proof}
-Suppose there exists a finite subcover $\sU \subset \sC$ for $S$ with $n$ elements
-\[ r_{1}, r_{2}, \ldots, r_{n} \]
-with the relationship
-\[ 0 = r_{1} < r_{2} < \cdots < r_{n} = 1. \]
-Let $q$ denote the maximum of the denominators of all $r_{i}$.
-As such, we note
-\[ \set*{r_{1}, \ldots, r_{n}} \subseteq F_{q}. \]
 
-For the sake of contradiction, suppose there exists some $r \in S$ such that
-\[ \abs{r - r_{i}} \ge \Rt{r_{i\gamma}} \ge \Rt{q}. \]
+Suppose for the sake of contradiction that there exists some finite subcover $\sU \subset \sC$ for $S$.
+Therefore, let $R$ be the (ordered) set of rationals indexing $\sU$:
+\[ R = \set*{r_{1}, r_{2}, \ldots, r_{n}}. \]
+Define $\alpha = 1/\!\sqrt{3}$ as the (positive) root of
+\[ p(x) = 3x^{2} - 1, \]
+which lands within $(0, 1)$.
+Now, by Liouville's Theorem, take $1/M = 1/(6 + 6\alpha)$ and create $A = 1/M - 10^{-10} < 1/M$
+and say that for all $v \in S$,
+\[ \abs{\alpha - v} > \frac{A}{v_{\gamma}^{2}} > \frac{1}{9.6v_{\gamma}^{2}} > \frac{1}{10^{v_{\gamma}}} \implies \alpha \notin U_{v}. \]
+Hence, $\alpha \notin U_{r}$, for every $r \in R$.
+However, this also means that in $R$, there is some ``closest''
+(for its matching interval, whether the infimum or supremum) $r_{i}$.
+This distance can be encoded by
+\[ d = \min\set*{\min\set*{\abs*{\alpha - \inf U_{r_{i}}}, \abs*{\alpha - \sup U_{r_{i}}}}_{r_{i} \in R}} > 0. \]
+If we let $d > \eps > 0$, there is for all $r_{i} \in R$
+\[
+  \abs*{\alpha - r_{i}} - \eps > \Rt{(r_{i})_{\gamma}}.
+\]
+Hence, we find that
+\[
+  \parens*{\alpha - \eps, \alpha + \eps} \intersect \parens*{\bigcup_{r \in R}U_{r}} = \emptyset.
+\]
+and therefore that because $(\alpha - \eps, \alpha + \eps)$ is nonempty,
+there must be an infinite number of rationals uncovered under $\sU$.
 
-
+Thus, $S$ is not compact.
 
 \qed{}
 
