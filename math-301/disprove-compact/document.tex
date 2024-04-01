@@ -3,7 +3,7 @@
 
 \input{template}
 
-%\usepackage{lmodern}
+\usepackage{lmodern}
 
 \author{Sam Price}
 \date{}
@@ -34,6 +34,18 @@ Unrelated to the actual proof, but the bounds on the sum of all were a little bi
 \]
 with $\varphi$ being Euler's totient function.
 
+\begin{thm}[Liouville's Theorem on Diophantine Approximation]\label{thm:liouville}
+  Let $f \in \Q[x]$ be irreducible and of degree $n > 0$. For all (necessarily irrational) $\alpha \in \R$ such that $f(\alpha) = 0$,
+  \[ \abs*{\alpha - \frac{p}{q}} > \frac{M}{q^{n}} \]
+  for all $\frac{p}{q} \in \Q$ for some constant $M > 0$.
+\end{thm}
+\begin{remark}
+  For the constant $M$ in Theorem~\ref{thm:liouville}, we have
+  \[ M < \min(1, 1/K, \abs{\alpha - \alpha_{1}}, \abs{\alpha - \alpha_{2}}, \ldots, \abs{\alpha - \alpha_{n}}) \]
+  where $\alpha_{1}, \ldots, \alpha_{n}$ are the roots of $f$ distinct from $\alpha$, and
+  \[ K = \max \abs{f'([\alpha - 1, \alpha + 1])}. \]
+  In fact, it is necessary that $f$ be irreducible because othwerise $1/f'(\alpha)$ may be undefined with multiplicity.
+\end{remark}
 
 \section{Definitions \& Notation}
 In this article, let $\parens*{\frac{p}{q}}_{\gamma} = q$, for any rational $p/q$ in canonical form.
@@ -47,18 +59,30 @@ and note that $U_{r} \ne \emptyset$ for any $r$.
 Suppose for the sake of contradiction that there exists some finite subcover $\sU \subset \sC$ for $S$.
 Therefore, let $R$ be the (ordered) set of rationals indexing $\sU$:
 \[ R = \set*{r_{1}, r_{2}, \ldots, r_{n}}. \]
+Suppose also without loss of generality that $\sU$ is minimal, in that removing any single set would result in $S$
+being uncovered.
 Define $\alpha = 1/\!\sqrt{3}$ as the (positive) root of
 \[ p(x) = 3x^{2} - 1, \]
 which lands within $(0, 1)$.
-Now, by Liouville's Theorem, take $1/M = 1/(6 + 6\alpha)$ and create $A = 1/M - 10^{-10} < 1/M$
-and say that for all $v \in S$,
-\[ \abs{\alpha - v} > \frac{A}{v_{\gamma}^{2}} > \frac{1}{9.6v_{\gamma}^{2}} > \frac{1}{10^{v_{\gamma}}} \implies \alpha \notin U_{v}. \]
+For Theorem~\ref{thm:liouville}, we need not worry about any case besides $1/K$, as
+either the difference is less than one for any prospective approximation (contained within $[0, 1]$),
+and the only other root for $p$ is $-\alpha$ whose distance is greater than 1.
+
+Hence, take $K$ as the maximum of $p'$ over $[\alpha - 1, \alpha + 1]$, and we see that it trivially (as it is linear)
+is equal to
+\[ K = 6\alpha + 6 = 9.464\ldots < 9.5 \]
+By Theorem~\ref{thm:liouville} then, we may say that for all $v \in S$ that
+\[ \abs{\alpha - v} > \frac{1}{9.5v_{\gamma}^{2}} > \frac{1}{10^{v_{\gamma}}}. \]
 Hence, $\alpha \notin U_{r}$, for every $r \in R$.
 However, this also means that in $R$, there is some ``closest''
 (for its matching interval, whether the infimum or supremum) $r_{i}$.
-This distance can be encoded by
-\[ d = \min\set*{\min\set*{\abs*{\alpha - \inf U_{r_{i}}}, \abs*{\alpha - \sup U_{r_{i}}}}_{r_{i} \in R}} > 0. \]
-If we let $d > \eps > 0$, there is for all $r_{i} \in R$
+This distance $d > 0$ can be encoded by
+\[
+  d = \min\set*{\abs{\sup U_{r_{i}} - \alpha}, \abs{\inf U_{r_{i}} - \alpha}}_{r_{i} \in R}
+\]
+which in fact must come from the nearest $r_{i}$ in either direction, as otherwise it would
+have nested intervals and be redundantly covered.
+If we let $\eps \in (0, d)$, there is for all $r_{i} \in R$
 \[
   \abs*{\alpha - r_{i}} - \eps > \Rt{(r_{i})_{\gamma}}.
 \]
