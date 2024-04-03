@@ -1,0 +1,71 @@
+% -*- compile-command: "latexmk -pdf notes.tex" -*-
+\documentclass{article}
+
+\input{template}
+
+\author{Sam Price}
+\date{}
+\title{!! TITLE WAVE~!!}
+
+\begin{document}
+
+\maketitle
+
+\section{Vectors \& Matrices}
+
+\section{Vector Spaces \& Linear Transformations}
+\subsection{Basis Vectors}
+
+A \emph{basis} of a vector space $V$ (normally $\R^{2}$ in our class) is a set of vectors
+\[ e_{1}, e_{2}, \ldots, e_{n} \]
+with $n$ corresponding to the dimension of $V$. The standard basis for $\R^{2}$ is the elementary basis vectors
+\[ e_{1} = \vlit{1 \\ 0} \qquad e_{2} = \vlit{0 \\ 1}.  \]
+
+For any set of vectors to be a basis, it must have the property that for all $v \in V$, there exist
+scalars $a_{1}, \ldots, a_{n}$ such that
+\[ a_{1}v_{1} + \cdots + a_{n}v_{n} = v. \]
+
+A basis can also be talked about as its own entity, marked as
+\[ B = \set*{v_{1}, \ldots, v_{n}}. \]
+
+\underline{Def}: If $S \subset V$ and $B = \set{v_{1}, \ldots, v_{n}}$ is a basis of $S$, then
+the (scalar) coefficients $a_{i}$ for any $v \in S$ are called the \emph{coordinates} of $v$ with respect to $B$.
+This can be denoted as
+\[ \bracks*{\vec{v}}_{B} = \vlit{a_{1} \\ a_{2} \\ \vdots \\ a_{n}}. \]
+
+\subsection{Linear Transformations}
+Our goal now is to find for some vector space $V$ with basis $B = \set*{v_{1}, \ldots, v_{n}}$ a linear transformation to another basis.
+Firstly, let us note that
+\[ \bracks*{v_{1}}_{B} = \vlit{1 \\ 0 \\ \vdots \\ 0}. \]
+This is clearly the $e_{1}$ from our standard basis in $\R^{n}$, and so we note that they are equivalent in that sense.
+
+Now, let $C = \set*{w_{1}, \ldots, w_{m}}$ be another basis of $V$. Suppose $P_{B \to C}$ is a linear transformation from vectors written
+in basis $B$ to basis $C$. Certainly, we would like
+\[ P_{B \to C}(\bracks{v_{i}}_{B}) = \bracks{v_{i}}_{C} \implies P_{B \to C} = \parens*{[v_{1}]_{C}, \ldots, [v_{n}]_{C}}. \]
+
+\begin{ex}
+  Let $B_{\std}$ be the standard basis for $\R^{3}$, and basis $B$ be
+  \[ \set*{\vlit{1\\0\\1}, \vlit{1\\1\\0}, \vlit{0\\1\\1}}. \]
+  Find the linear transformation $A$ such that for all $v \in V$ with basis $B_{\std}$, there is $Av = [v]_{B}$ in basis $B$.
+\end{ex}
+We solve for $A$, and find that
+\[ A = \begin{pmatrix}[1.2]
+  \sfrac{1}{2} & -\sfrac{1}{2} & \sfrac{1}{2}\\
+  \sfrac{1}{2} & \sfrac{1}{2} & -\sfrac{1}{2}\\
+  -\sfrac{1}{2} & \sfrac{1}{2} & \sfrac{1}{2}
+\end{pmatrix} \]
+Which is in fact a proper linear transformation, which we may factor $\sfrac{1}{2}$ out of.
+
+\subsubsection{Change of Basis in a Matrix}
+Given a transformation $A\from V \to W$ with basis $B = \set*{b_{1}, \ldots, b_{n}}$ of $V$,
+\[ \bracks{A}_{B} = \Bigg(\bracks{Ab_{1}}_{B}, \bracks{Ab_{2}}_{B}, \ldots, \bracks{Ab_{n}}_{B}\Bigg). \]
+
+The most concise way is that given vector spaces $V, W$, transformation $A$ and bases $B, C$ there is
+\[ \bracks{A}_{C} = P_{B\to C} \cdot \bracks{A}_{B} \cdot P_{B \to C}\inv. \]
+\underline{Def}: Two matrices $A, B$ are \emph{similar} if there is an invertible matrix $P$ such that
+\[ A = P \cdot B \cdot P\inv \]
+Therefore, we can say from before that $B, C$ are similar transformations.
+
+\section{Rank \& Nullity}
+
+\end{document}
