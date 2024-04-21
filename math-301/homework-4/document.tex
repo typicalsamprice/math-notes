@@ -1,0 +1,165 @@
+% -*- compile-command: "latexmk -pdf document.tex" -*-
+\documentclass{article}
+
+\input{template}
+
+\author{Sam Price}
+\date{}
+\title{Homework 4\\\Large{Take 2, Restarting Because Computers Suck}}
+
+\begin{document}
+
+\maketitle
+
+This had to be entirely restarted, because my computer had a stork. Birds are annoying, and I hope it lasts me through the semester at least.
+The particularly tedious parts may be left for later since this is really gonna get to me if it happens again (frequent commits, I hope?)
+
+\begin{enumerate}
+
+  % One
+  \item Tedious, TBD
+
+
+  % Two
+  \item Fix $\eps = 1$. Then, we see $f(x) = 3$ for $x < 3$ and $f(x) = 5$ for $x > 5$. Thus, we note for all $\delta > 0$
+        \[ 0 < \abs{x - 3} < \delta \implies \abs{f(x) - L} < 1. \]
+        However, this means that
+        \[ \abs{3 - L} < 1 \quad\text{and}\quad \abs{5 - L} < 1 \]
+        which implies that $\abs{5 - 3} < 2$ which is clearly false.
+
+  % Three
+  \item Let $g(x) = x \cdot 1_{\Q}(x)$. Show that $g$ is continuous at $c$ iff $c = 0$.
+
+        \begin{proof}
+          $\implies$. Let $c \ne 0$ and fix $\eps = \abs{c}/2$. Assume first that $c \in \Q$.
+          For all $\delta > 0$ we may find a suitably close irrational $x$ such that $\abs{g(x) - g(c)} = \abs{c} > \abs{c}/2$.
+          Now, say $c \notin \Q$. Then, we may pick a rational $x$ suitably close to $c$ such that
+          \[ \abs{g(x) - g(c)} = \abs{x} > \abs{c}/2. \]
+          We may say the inequality holds because there are infinitely many $x = p/q$ such that
+          \[ \abs*{c - \frac{p}{q}} < \frac{1}{q^{2}}
+            < \frac{\abs{c}}{2}
+            \implies x \in N_{\abs{c}/2}(c) \implies f(x) \in \parens*{ c - \frac{\abs{c}}{2}, c + \frac{\abs{c}}{2} }
+          \]
+          and thus $\abs{x} > \abs{c}/2 = \eps$.
+
+          $\impliedby$. Let $c = 0$ and $\delta = \eps$. Then, we see
+          \[ \abs{x} < \delta \implies \abs{g(x) - g(0)} = \abs{g(x)} \le \abs{x} < \delta = \eps. \]
+        \end{proof}
+  % Four
+  \item Let $f \from \R \to \R$ be continuous, and 0 at rational numbers. Prove that $f(x) = 0$ for all $x \in \R$.
+
+        \begin{proof}
+          Suppose there is some $\alpha \notin \Q$ such that $f(\alpha) \ne 0$. Fix $\eps = \abs{f(\alpha)}$.
+          For each $\delta > 0$ we see that
+          \[ \abs{x - \alpha} < \delta \implies \abs{f(x) - f(\alpha)}. \]
+          However, similar to before, we may pick some rational $x$ within $N_{\delta}(\alpha)$, and so find
+          that
+          \[ \abs{x - \alpha} < \delta \quad\text{and}\quad \abs{f(x) - f(\alpha)} = \abs{f(\alpha)} \not< \eps. \]
+        \end{proof}
+  % Five
+  \item Also very tedious, but I am writing down the left- and right-hand limit definitions here still:
+
+        \[\tag{left} \forall \eps > 0 \, \exists \delta > 0, 0 < c - x < \delta \implies \abs{f(x) - L} < \eps. \]
+        \[\tag{right} \forall \eps > 0 \, \exists \delta > 0, 0 < x - c < \delta \implies \abs{f(x) - L} < \eps. \]
+
+
+
+  % Six
+  \item
+        \begin{enumerate}
+
+          \item Prove $h(x) = \sin(1/x)$ is continuous at $x \ne 0$.
+
+                By Prop 6.20 $1/x$ is continuous since $x \ne 0$ and it is a division of $C^{0}$ functions.
+                Similarly, by Prop 6.24 $h$ is then continuous since it is a \emph{composition} of continuous functions.
+
+          \item Prove $h$ is discontinuous at $x = 0$.
+
+                \begin{lem}\label{lem:sin-dense}
+                  The set $\sin(\Z)$ is dense in $[-1, 1]$.
+                \end{lem}
+
+                The proof of Lemma~\ref{lem:sin-dense} will be at the end of this whole Fest.
+
+                \begin{proof}
+                  Define the sequence $(a_{n})_{n \in \N}$:
+                  \[ a_{n} = \begin{cases}
+                    \frac{1}{k} & \text{$n = 2k$ for some $k \in \N$}\\
+                    -\frac{1}{k} & \text{$n = 2k + 1$ for some $k \in \N$}
+                  \end{cases} \]
+                It should be clear that $h(a_{n}) = \sin(\Z \setminus \set{0})$ and that $a_{n} \to 0$.
+                By Lemma~\ref{lem:sin-dense}, $\sin \Z$ is dense, and so $h(a_{n})$ (as a whole sequence) is dense as well.
+                Suppose for the sake of contradiction that $h(a_{n}) \to 0$ as well.
+                Fix $\eps = 1/10$. Then, by assumption, there is some $M$ such that $\forall n > M$ we have
+                \[ \abs{h(a_{n})} < \eps. \]
+                Now, consider the set $S = \set{ \abs{h(a_{n})} \ge \eps : n \le M }$.
+                Since $M$ is finite, so must $S$ be too (and we know it is nonempty as well $\sin(1/2) > \sin(1/4) > 1/10$.)
+
+                Thus, let $a = \max S$ and $b = \max S \setminus a$. By our choice of $a, b$ there is no value of $h(a_{k})$ between them,
+                but this is contradictory to the fact that $h(a_{k})$ is dense. Hence, $h$ cannot be continuous at $x = 0$.
+                \end{proof}
+
+          \item Prove $g(x) = x \cdot h(x)$ is continuous at $x = 0$.
+
+                \begin{proof}
+                  Let $\eps > 0$ and pick $\delta = \eps$. Then, we see that
+                  \[ 0 < \abs{x - 0} < \delta \implies \abs{g(x) - g(0)} = \abs{g(x)} \le \abs{x} < \delta = \eps. \]
+                  This is true because $\sin(y) \in [-1, 1]$ and $\abs{x \sin y} \le \abs{x}$ then.
+                \end{proof}
+
+        \end{enumerate}
+
+  % Seven
+  \item Let $f \from \R \to \R = ax + b$ for some fixed real numbers $a$ and $b$. Prove $f$ is uniformly continuous.
+        \begin{proof}
+          Let $\eps > 0$, and pick $\delta = \eps/\abs{a}$. Then for $x, y \in \R$:
+          \[ \abs{x - y} < \delta \implies \abs{ax + b - (ay + b)} = \abs{ax - ay} = \abs{a}\abs{x - y} < \delta\abs{a} = \eps. \]
+        \end{proof}
+
+  % Eight
+  \item
+        \begin{enumerate}
+
+          \item Prove that if $f \from A \to \R$ is uniformly continuous and $A$ is bounded, then $f(A)$ is bounded.
+
+                \begin{proof}
+                  Let $f \from A \to \R$ be UC and $A$ be bounded by $a = \sup A, b = \inf A$.
+                  Fix $\eps > 0$. Then, there is some $\delta > 0$ such that we can cover $A$ with $n$ many $\delta$-balls.
+                  In each $\delta$-ball (denoted $\delta_{i}$ with center $c_{i}$), we have for $x \in \delta_{i}$
+                  \[ \abs{x - c_{i}} < \delta \implies \abs{f(x) - f(c_{i})} < \eps. \]
+                  In fact, we notice
+                  \[ \abs{f(x)} = \abs{f(x) - f(c_{i}) + f(c_{i})} \le \abs{f(x) - f(c_{i})} + \abs{f(c_{i})} < \eps + \abs{f(c_{i})}. \]
+                  Then, we see for $x \in \delta_{i}$
+                  \[ \abs{f(x)} < \eps + \max\limits_{1 \le i \le n}\abs{f(c_{i})}. \]
+                  Since $f$ is then bounded on each $\delta_{i}$ and there are finitely many, it is bounded by the maximum of them and therefore
+                  $f(A)$ is bounded altogether.
+                \end{proof}
+
+          \item Both $\ln x$ and $1/x$ work, which are two sides of the same coin. Provided, of course, the coin is differential (or integral) calculus.
+
+          \item Consider $\sin(1/x)$ with a fixed $\eps = 1/2$ and $x, y \approx 0$.
+
+        \end{enumerate}
+
+  % Nine
+  \item Let $f, g$ be continuous on $[a, b]$ with $f(a) < g(a)$ and $f(b) > g(b)$. Prove $\exists c \in (a, b)$ such that $f(c) = g(c)$.
+
+        \begin{proof}
+          Define $h = f - g$. $h$ is also continuous, and $h(a) < 0 < h(b)$.
+          By the intermediate value theorem we then know there is some $c \in (a, b)$ such that $h(c) = 0$, and thus $f(c) = g(c)$.
+        \end{proof}
+\end{enumerate}
+
+\begin{proof}[Lemma 1 Proof]
+  Let $\eps > 0$, $x \in [0, 2\pi]$. By Dirichlet, there exists for each irrational $\alpha$ and real $N$ (in this case, $\alpha = 2\pi$)
+  integers $p, q$ such that
+  \[ \abs{p\alpha - q} < \frac{1}{N}. \]
+  By choosing $N$ large enough, we then know that $\frac{1}{N} < \eps$.
+  As such, pick $p, q$ such that
+  \[ \abs{p\alpha - q - x} < \eps \implies \abs{\sin(p2\pi - q) - \sin(x)} = \abs{-\sin(q) - \sin(x)} < \eps. \]
+  Which we can say by the uniform continuity of $\sin$ as given earlier.
+  As such, for every $x \in [0, 2\pi]$ (and hence $\sin(x) \in [-1, 1]$) there is some $m \in \Z$ such that
+  \[ \sin(m) \in N_{\eps}(\sin(x)). \]
+\end{proof}
+
+\end{document}
