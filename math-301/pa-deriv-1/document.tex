@@ -1,0 +1,108 @@
+% -*- compile-command: "latexmk -pdf document.tex" -*-
+\documentclass{article}
+
+\input{template}
+
+\author{Sam Price}
+\date{}
+\title{Preview Assignment\\\Large{Derivatives I}}
+
+\begin{document}
+
+\maketitle
+
+\begin{enumerate}
+
+
+  \item Prove the quotient rule:
+
+        % TeX SE: questions/25903
+        \noindent\fbox{
+          \parbox{\textwidth}{
+            \textbf{Quotient Rule}: Let $f, g \from I \to \R$ be differentiable at $c \in I$ with $g(c) \ne 0$.
+            \[ \parens*{\frac{f}{g}}'(c) = \frac{f'(c)g(c) - f(c)g'(c)}{g^{2}(c)} \]
+          }
+        }
+
+        \begin{proof}
+          Let $f, g \from I \to \R$ be differentiable at $c \in I$ and $g(c) \ne 0$.
+          Therefore, we aim to find
+          \[ \lim_{x \to c} \frac{f}{g}(x) =
+            \lim_{x \to c} \frac{\frac{f(x)}{g(x)} - \frac{f(c)}{g(c)}}{x - c} \]
+          We notice then
+          \begin{align}
+            \lim_{x \to c} \frac{\frac{f(x)}{g(x)}
+            - \frac{f(c)}{g(c)}}{x - c} &= \lim_{x \to c}\frac{f(x)g(c) - f(c)g(x)}{(x - c)g(x)g(c)}\notag\\
+            &= \lim_{x \to c} \frac{f(x)g(c) + [f(c)g(c) - f(c)g(c)] - f(c)g(x)}{x - c} \cdot \lim_{x \to c}\frac{1}{g(x)g(c)}\notag\\
+            &= \lim_{x \to c} \frac{g(c)(f(x) - f(c)) - f(c)(g(x) - g(c))}{x - c} \cdot \frac{1}{{g(c)}^{2}}\\
+            &= \lim_{x \to c} g(c)\frac{f(x) - f(c)}{x - c} - \lim_{x \to c} f(c)\frac{g(x) - g(c)}{x - c} \cdot \frac{1}{{g(c)}^{2}}\notag\\
+            &= \frac{f'(c)g(c) - f(c)g'(c)}{{g(c)}^{2}}\notag.
+          \end{align}
+
+          Where we find (1) because $g$ is continuous (and nonzero already) at $c$.
+        \end{proof}
+
+  \item Define $g \from \R \to \R$ as
+        \[ g(x) = \begin{cases}
+          x^{3}\sin(1/x) & x \ne 0\\
+          0 & x = 0.
+        \end{cases} \]
+
+        \begin{enumerate}
+          \item Is $g$ differentiable at $x \ne 0$? Find a formula for $g'$ when $x \ne 0$.
+
+                Yes, simply $g'(x) = 3x^{2}\sin(1/x) -x\cos(1/x)$, taking note that
+                \[ \frac{d}{dx} \sin(1/x) = \cos(1/x) \cdot -\frac{1}{x^{2}}. \]
+
+          \item Is $g$ differentiable at $x = 0$? Use the limit definition to check.
+
+                \begin{align*}
+                  g'(0) = \lim_{x \to 0}g(x) &= \lim_{x \to 0} \frac{g(x) - g(0)}{x - 0}\\
+                  &= \lim_{x \to 0}\frac{x^{3}\sin(1/x)}{x}\\
+                  &= \lim_{x \to 0}x^{2}\sin(1/x) = 0.
+                \end{align*}
+                Which is true as $x^{2}\sin(1/x)$ is continuous using Corollary 6.15 and
+                the multiplication of $f, g \in C^{0}$ (and so the limit does equal its value at $x = 0$.)
+
+          \item I genuinely don't know why you couldn't \textendash{} to me it looks like $g'$ \emph{is} continuous at 0?
+
+        \end{enumerate}
+
+  \item Let $f \from \R \to \R$. Show (a) that $f$ is differentiable on $\R$,
+        and that (b) $f \notin D^{2}$. Define $f$ as
+        \[ f(x) = \begin{cases}
+          -x^{2} & x \le 0\\
+          x^{2} & x > 0
+        \end{cases} \]
+
+        \begin{enumerate}
+
+          \item Clearly, $f$ is differentiable away from 0 (the branches are differentiable),
+                so let us only concern ourselves with $f'(0)$.
+
+                Looking at this, we find
+                \[
+                  \lim_{x \to 0^{-}} \frac{f(x) - f(0)}{x} = \lim_{x \to 0^{-}}\frac{-x^{2}}{x} = \lim_{x \to 0^{-}} -x = -0 = 0,
+                \]
+                and for the right:
+                \[
+                  \lim_{x \to 0^{+}} \frac{f(x) - f(0)}{x} = \lim_{x \to 0^{+}}\frac{x^{2}}{x} = \lim_{x \to 0^{+}} x = 0.
+                \]
+                As such, $f'$ exists.
+
+          \item Now, since $f$ is differentiable, we can find the formula where
+                \[ f'(x) = \begin{cases}
+                  - 2x & x \le 0\\
+                  2x & x > 0.
+                \end{cases} \]
+
+                However, the issue is that when taking $f''$, $f'(x) = 2\abs{x}$ and so is not differentiable at $x = 0$ since
+                the sign (of $x$) switches instantly. ``Formally'' put,
+                \[ \lim_{x \to 0}\frac{2\abs{x}}{x} = ? \]
+                is incomprehensible because $\pm 2$ isn't allowed (limits exist iff they are unique.)
+
+        \end{enumerate}
+
+\end{enumerate}
+
+\end{document}

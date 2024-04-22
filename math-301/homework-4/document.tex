@@ -76,24 +76,21 @@ The particularly tedious parts may be left for later since this is really gonna 
           \item Prove $h$ is discontinuous at $x = 0$.
 
                 \begin{lem}\label{lem:sin-dense}
-                  The set $\sin(\Z)$ is dense in $[-1, 1]$.
+                  The set $\sin(\N)$ is dense in $[-1, 1]$.
                 \end{lem}
 
                 The proof of Lemma~\ref{lem:sin-dense} will be at the end of this whole Fest.
 
                 \begin{proof}
                   Define the sequence $(a_{n})_{n \in \N}$:
-                  \[ a_{n} = \begin{cases}
-                    \frac{1}{k} & \text{$n = 2k$ for some $k \in \N$}\\
-                    -\frac{1}{k} & \text{$n = 2k + 1$ for some $k \in \N$}
-                  \end{cases} \]
-                It should be clear that $h(a_{n}) = \sin(\Z \setminus \set{0})$ and that $a_{n} \to 0$.
-                By Lemma~\ref{lem:sin-dense}, $\sin \Z$ is dense, and so $h(a_{n})$ (as a whole sequence) is dense as well.
+                  \[ a_{n} = \frac{1}{n} \]
+                It should be clear that $h(a_{n}) = \sin(\N)$ and that $a_{n} \to 0$.
+                By Lemma~\ref{lem:sin-dense}, $\sin \N$ is dense, and so $h(a_{n})$ (as a whole sequence) is dense as well.
                 Suppose for the sake of contradiction that $h(a_{n}) \to 0$ as well.
                 Fix $\eps = 1/10$. Then, by assumption, there is some $M$ such that $\forall n > M$ we have
                 \[ \abs{h(a_{n})} < \eps. \]
                 Now, consider the set $S = \set{ \abs{h(a_{n})} \ge \eps : n \le M }$.
-                Since $M$ is finite, so must $S$ be too (and we know it is nonempty as well $\sin(1/2) > \sin(1/4) > 1/10$.)
+                Since $M$ is finite, so must $S$ be too (and we know it is nonempty as well because $\sin(2) > \sin(1) > 1/10$.)
 
                 Thus, let $a = \max S$ and $b = \max S \setminus a$. By our choice of $a, b$ there is no value of $h(a_{k})$ between them,
                 but this is contradictory to the fact that $h(a_{k})$ is dense. Hence, $h$ cannot be continuous at $x = 0$.
@@ -149,17 +146,25 @@ The particularly tedious parts may be left for later since this is really gonna 
           By the intermediate value theorem we then know there is some $c \in (a, b)$ such that $h(c) = 0$, and thus $f(c) = g(c)$.
         \end{proof}
 \end{enumerate}
+\pagebreak
+
+\begin{theorem}[Dirichlet's Approximation Theorem]
+  For any real $\alpha$ and $N$, there exist integers $p, q$ such that
+  \[ \abs{p\alpha - q} < \frac{1}{N}, \]
+  with $1 \le q \le N$. By having a large enough $N$ we can make the difference as small as needed.
+\end{theorem}
 
 \begin{proof}[Lemma 1 Proof]
-  Let $\eps > 0$, $x \in [0, 2\pi]$. By Dirichlet, there exists for each irrational $\alpha$ and real $N$ (in this case, $\alpha = 2\pi$)
-  integers $p, q$ such that
-  \[ \abs{p\alpha - q} < \frac{1}{N}. \]
-  By choosing $N$ large enough, we then know that $\frac{1}{N} < \eps$.
-  As such, pick $p, q$ such that
-  \[ \abs{p\alpha - q - x} < \eps \implies \abs{\sin(p2\pi - q) - \sin(x)} = \abs{-\sin(q) - \sin(x)} < \eps. \]
-  Which we can say by the uniform continuity of $\sin$ as given earlier.
-  As such, for every $x \in [0, 2\pi]$ (and hence $\sin(x) \in [-1, 1]$) there is some $m \in \Z$ such that
-  \[ \sin(m) \in N_{\eps}(\sin(x)). \]
+  Let $x \in \R, \eps > 0$. Suppose for the sake of contradiction there is no $n \in \N$ such that
+  \[ \sin(n) \in N_{\eps}(\sin(x)) \setminus \set{\sin(x)}. \]
+  So, our aim is to show that $n + 2\pi m$ for some $m \in \Z, n \in \N$ is within $\eps$ of $x$.
+  By Dirichlet, we can make $\abs{v} = \abs{n + 2\pi m} < \eps$, and negating if necessary so that $n$ is positive.
+  Then, multiply by $d \in \N$ such that $d(n + 2\pi m) \in N_{\eps}(x)$. Because $v$ is less than $\eps$, there is some multiple
+  that lands it within $\eps$ of $x$ -\ think of splitting $\R$ into (infinitely many) $\eps$-sized subintervals:
+  one of these clearly must contain $x$ and so a multiple of our approximation of $2\pi$ would necessarily also be within this interval.
+  Thus, we say
+  \[ \abs{dn + 2\pi m d - x} < \eps \implies \abs{\sin(dn + 2\pi m d) - \sin(x)} = \abs{\sin(dn) - \sin(x)} < \eps. \]
+  Hence, $\sin(\N)$ is dense.
 \end{proof}
 
 \end{document}
