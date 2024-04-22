@@ -401,10 +401,10 @@ Properties of $\abs{\cdot}$:
 \end{defn}
 
 \begin{thm}[Union of Closed Sets]\label{thm:union-closed-sets}
-  If $\set{U_{\alpha}}_{\alpha \in \cS}$ is a class of closed sets, then
+  If $\set{U_{\alpha}}_{\alpha \in \sS}$ is a class of closed sets, then
   \begin{itemize}
-    \item $\ds\bigcap_{\alpha \in \cS}U_{\alpha}$ is closed.
-    \item If $\abs{\cS} = n$ is finite, then $\ds\bigcup_{\alpha = 1}^{n}U_{\alpha}$ is closed.
+    \item $\ds\bigcap_{\alpha \in \sS}U_{\alpha}$ is closed.
+    \item If $\abs{\sS} = n$ is finite, then $\ds\bigcup_{\alpha = 1}^{n}U_{\alpha}$ is closed.
   \end{itemize}
 \end{thm}
 
@@ -423,14 +423,14 @@ Properties of $\abs{\cdot}$:
 \subsection{Covers and Subcovers}
 
 \begin{defn}[Cover]\label{defn:cover}
-  A \emph{cover} of a set $A$ is a class $\cS$ such that
-  \[ A \subseteq \bigcup_{\alpha \in \cS}U_{\alpha}. \]
-  If there is a finite subset $\cF \subseteq \cS$ where this holds, then $\set{U_{\alpha}}_{\alpha \in \cF}$
+  A \emph{cover} of a set $A$ is a class $\sS$ such that
+  \[ A \subseteq \bigcup_{\alpha \in \sS}U_{\alpha}. \]
+  If there is a finite subset $\sF \subseteq \sS$ where this holds, then $\set{U_{\alpha}}_{\alpha \in \sF}$
   is called a \emph{finite subcover}.
 \end{defn}
 
 \begin{defn}[Open Cover]\label{defn:open-cover}
-  A cover $\cS$ is called an \emph{open cover} if each set in $\cS$ is open.
+  A cover $\sS$ is called an \emph{open cover} if each set in $\sS$ is open.
 \end{defn}
 
 \subsubsection{Compactness}
@@ -449,5 +449,21 @@ to prove a set $A$ is compact.
     \item For any sequence $(a_{n})$ in $A$, there is a subsequence $(a_{n_{k}})$ that converges to a point in $A$.
   \end{itemize}
 \end{thm}
+
+\section*{Derivatives \& Integrals}
+
+% Need to define: Partition, Riemann-Darboux Sum
+% Prove add-1 point to partition -> better estimate
+
+\begin{defn}[Riemann-Darboux Sum]
+  If $f \from I \to \R$ bounded and $P$ is a partition of $I$, then the upper and lower Riemann sums are denoted:
+  \[ U(f) = \inf U(f, P) \]
+  \[ L(f) = \sup L(f, P) \]
+  and $f$ is integrable if $U(f) = L(f)$.
+\end{defn}
+
+\begin{defn}[Integrable Function]
+  Note that
+\end{defn}
 
 \end{document}

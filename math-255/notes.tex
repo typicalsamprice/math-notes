@@ -100,6 +100,61 @@ Which is (partially) the \emph{Jacobian} of $T$.
   \]
 \end{theorem}
 
+\section*{Green's Theorem}
+For a vector field $\vec{F} = \veclit{P, Q}$, we can say
+\[ \int_{\del A} \vec{F} \cdot \dx\vec{r} = \iint_{A} \frac{\del Q}{\del x} - \frac{\del P}{\del y} \dx A.  \]
 
+In fact, the integrand comes from the determinant:
+\[ \left|\begin{matrix}
+  \frac{\del}{\del x} & \frac{\del}{\del y}\\
+  P & Q
+\end{matrix}\right| = \grad \cross \vec{F} = \curl(\vec{F}). \]
+
+\section*{16.5}
+In 16.3, we found several results to show that a 2-component vector field $V = \veclit{P, Q}$ is conservative if:
+\begin{itemize}
+  \item $\int_{C} V \cdot d\vec{r}$ is path independent.
+  \item $\del P / \del y = \del Q / \del x$.
+  \item There is some $f$ such that $\grad f = V$.
+\end{itemize}
+
+\begin{defn}[Curl]
+  The curl of a vector field $\vec{F}$ is
+  \[ \curl(\vec{F}) = \grad \cross \vec{F}. \]
+\end{defn}
+Because curl is defined for $n \ge 2$ many variables, such as in 3 dimensions:
+\[
+  \curl(\veclit{P, Q, R}) = \left|\begin{matrix}[1.3]
+    \ihat & \jhat & \khat\\
+    \frac{\del}{\del x} & \frac{\del}{\del y} & \frac{\del}{\del z}\\
+    P & Q & R
+  \end{matrix}\right|
+\]
+which is also a vector field. For any conservative field $V$, $\curl V = \vec{0}$.
+
+\begin{defn}[Divergence]
+  The divergence of a vector field $\vec{F}$ is
+  \[ \div(\vec{F}) = \grad \cdot \vec{F} = \frac{\del P}{\del x} + \frac{\del Q}{\del y} + \frac{\del R}{\del z}, \]
+\end{defn}
+which is simply a scalar function $f(x, y, z)$.
+
+\begin{ex}
+  What is $\div(\curl \vec{F})$?
+
+  It is
+  \[
+    \frac{\del}{\del x}\parens*{\frac{\del R}{\del y} - \frac{\del Q}{\del z}}
+    - \frac{\del}{\del y}\parens*{\frac{\del R}{\del x} - \frac{\del P}{\del z}}
+    + \frac{\del}{\del z}\parens*{\frac{\del P}{\del y} - \frac{\del Q}{\del x}}
+  \]
+  which for $f \in C^{2}$ is 0, as expected (since $\curl \vec{F} = \vec{0} \implies \grad \cdot \vec{0} = 0$).
+\end{ex}
+
+\begin{theorem}
+  \[
+    \iint_{C} \vec{F} \cdot \dx\vec{r} = \iint_{D} \curl \vec{F} \cdot \khat \dx A
+  \]
+  where $\vec{F} = \veclit{P, Q, 0}$.
+\end{theorem}
 
 \end{document}
