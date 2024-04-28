@@ -1,0 +1,25 @@
+% -*- compile-command: "latexmk -pdf document.tex" -*-
+\documentclass{article}
+
+\input{template}
+
+\author{Sam Price}
+\date{}
+\title{Presentation \#??}
+
+\begin{document}
+
+\maketitle
+
+1. Show that for $A \subseteq \R$, $\Ext A$, $\Int A$ and $\del A$ are disjoint.
+
+Clearly, $\del A \intersect \Ext A$ or $\del A \intersect \Int A$ are impossible, since if \emph{all} $\delta$-balls
+interesect \emph{both} $A$ and $A^{C}$, then none are wholly inside either.
+
+Then, suppose there is some $x \in \Ext A \intersect \Int A$. So, let $\delta > 0$ suffice so that $N_{\delta}(x) \subseteq A$.
+Then, any smaller will still be inside $A$. Any larger, it will either (a) be contained in $A$, or (b) intersect both $A^{C}$ and $A$
+and hence cannot be in $\Ext A$.
+
+2. Show that $\Int A \union \Ext A \union \del A = \R$.
+
+\end{document}

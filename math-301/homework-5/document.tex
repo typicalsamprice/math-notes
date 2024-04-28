@@ -1,0 +1,57 @@
+% -*- compile-command: "latexmk -pdf document.tex" -*-
+\documentclass{article}
+
+\input{template}
+
+\author{Sam Price}
+\date{}
+\title{Homework 5}
+
+\begin{document}
+
+\maketitle
+
+\begin{enumerate}
+
+  \item 7.3: Let $f \from \R \to \R = \floor{x}$, and let $C$ be the points at which $f$ is differentiable.
+        Determine $C$ and $f' \from C \to \R$.
+
+        Clearly, $f$  is discontinuous at integers, and so we can discount those from $C$ immediately. Then, let $c \in (n, n + 1)$ for some $n \in \Z$.
+        Let $\eps > 0$, and pick $\delta < \min{\abs{c - n}, \abs{c - n - 1}}$. Then, $\abs{x - c} < \delta \implies \abs{f(x) - f(c)} = 0 < \eps$.
+
+        Hence, $f'\from C \to \R = 0$ as well, since it is a flat line on each interval $(n, n + 1)$.
+
+  \item Let
+        \[ f_{a}(x) = \begin{cases} x^{a} & x \ge 0\\ 0 & x < 0 \end{cases} \]
+        for some $a \in \R$.
+
+        \begin{enumerate}
+          \item For which $a$ is $f_{a}$ continuous at $x = 0$?
+
+                Let $\eps > 0$.
+                For $a > 0$, we see that picking $\delta = \eps^{1/a}$
+                gives the result:
+                \[ \abs{x} < \delta \implies \abs{f(x)} = \abs{x^{a}} = \abs{x}^{a} < \delta^{a} = \eps. \]
+
+                For $a = 0$, $f(0) = 1$ and so is clearly discontinuous (for $\eps = 1/2$, any $\delta$ is insufficient by picking a ``small'' negative number.)
+
+                For $a < 0$ we have a divide-by-zero quandry, since $x^{-a} = \frac{1}{x^{a}}$ and for $x = 0$, is $1/0$.
+
+          \item For which $a$ is $f_{a}$ \emph{differentiable} at $x = 0$?
+
+                Let us first look at the difference quotient:
+                \[ \lim_{x \to 0}\frac{f(x) - f(0)}{x - 0} = \lim_{x \to 0}\frac{x^{a}}{x} = \lim_{x \to 0} x^{a-1}.\]
+                For $a > 1$, this is clearly defined as simply 0.
+                The reason $a = 1$ is differentiable is that
+                \[ \lim_{x \to 0}\frac{f_{1}(x) - f_{1}(0)}{x - 0} = \lim_{x\to0}\frac{x}{x} = 1 \]
+                which is still well-defined.
+
+                For $a < 1$, we find that $b = a - 1 < 0$ and so $x^{b}$ (in the limit) is another division by zero -\ quite the no-no.
+
+                Thus, $f_{a}$ is differentiable at 0 for $a \ge 1$.
+
+        \end{enumerate}
+
+\end{enumerate}
+
+\end{document}

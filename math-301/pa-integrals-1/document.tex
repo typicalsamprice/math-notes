@@ -1,0 +1,85 @@
+% -*- compile-command: "latexmk -pdf document.tex" -*-
+\documentclass{article}
+
+\input{template}
+
+\author{Sam Price}
+\date{}
+\title{Preview Assignment\\\Large The Integral}
+
+\begin{document}
+
+\maketitle
+
+\begin{enumerate}
+
+  \item Show that
+        \[ f(x) = \begin{cases} 1 & 0 \le x \le 1 \\ 2 & 1 < x \le 2 \end{cases} \]
+        is integrable, the long way.
+
+        Firstly, let $\eps > 0$ and $P = \set{0, 1 - \eps/3, 1 + \eps/3, 2}$ be the partition of relevance.
+
+        If $\eps > 3$, simply proceed as if $\eps = 3$ --- everything will work out fine then.
+        Then, we can note that
+        \[ U(f, P) = 1\parens*{1 - \frac{\eps}{3}} + 2\parens*{1 + \frac{\eps}{3} - \parens*{1 - \frac{\eps}{3}}} + 2\parens*{2 - \parens*{1 + \frac{\eps}{3}}} \]
+        which simplifies to
+        \[ U(f, P) = 3 + \frac{\eps}{3}. \]
+        Similarly, $L(f, P)$ will simplify to $3 - \dfrac{\eps}{3}$.
+
+        Using this, we can then say
+        \[ U(f, P) - L(f, P) = \frac{2\eps}{3} < \eps. \]
+        Hence, $f$ is integrable.
+
+  \item Do it again, but easier this time!
+
+        Certainly, $f\from [0, 1] \to \R$ is integrable, since it is continuous.
+        Similarly, $f$ is integrable on $[1, 2]$ since it has a single discontinuity at the boundary which is inconsequential
+        (this feels hand-wavy, but I'm not sure it can be ``short'' without doing something similar.)
+
+        Thus, by Lemma 8.19 $f$ is integrable on $[0, 2]$, its entire domain.
+
+  \item Long proof moment.
+
+        \begin{enumerate}
+
+          \item Given some partition $P$ for $f$, find an expression for $M_{i}(kf) - m_{i}(kf)$. Consider both branches $k \ge 0$ and $k < 0$.
+                Note that my notation is a little barebones but hopefully still understandable
+
+                Firstly, for \underline{$k \geqslant 0$}, we see that
+                \[ M_{i}(kf) = \sup(kf_{i}) = k \sup(f_{i}) = k \cdot M_{i} \]
+                and similarly for the lower sums, $m_{i} = k \cdot m_{i}$.
+
+                Then, for \underline{$k < 0$}, we find
+                \[ M_{i}(kf) = \sup(kf_{i}) = k\inf(f_{i}) = k \cdot m_{i}. \]
+                Indeed, we see the same ``switch'' with $m_{i}$, in that
+                \[ m_{i}(kf) = \inf(kf_{i}) = k\sup(f_{i}) = k \cdot M_{i}. \]
+
+                This means that their difference is
+                \[ M_{i}(kf) - m_{i}(kf) = \abs{k}(M_{i} - m_{i}). \]
+                We can do this without cases because taking $\abs{k}$ means
+                the sign switches only for $k < 0$, which is exactly what we want.
+
+          \item Now do this in the full sums.
+
+                \[ U(kf, P) - L(kf, P) = \sum M_{i}(kf) - m_{i}(kf) = \abs{k} \sum M_{i} - m_{i} = \abs{k}(U(f, P) - L(f, P)).  \]
+
+          \item Final proof:
+
+                \begin{proof}
+                  Let $f \from [a, b] \to \R$ be integrable and $k \in \R$. First consider $k \ne 0$, and let $\eps > 0$.
+                  By Darboux's Criterion there is some partition $P$ such that $U(f, P) - L(f, P) < \eps/\abs{k}$.
+
+                  Then, on each interval $[x_{i - 1}, x_{i}]$, $M_{i}(kf) - m_{i}(kf) = \abs{k}(M_{i}(f) - m_{i}(f))$, so we see that:
+                  \begin{align*}
+                    U(kf, P) - L(kf, P) &= \sum_{i = 1}^{n} (M_{i}(kf) - m_{i}(kf))(x_{i} - x_{i - 1})\\
+                    &= \sum_{i = 1}^{n} \abs{k}(M_{i} - m_{i})(x_{i} - x_{i - 1})\\
+                    &= \abs{k}(U(f, P) - L(f, P))\\
+                    &< \abs{k}\frac{\eps}{\abs{k}} = \eps.
+                  \end{align*}
+                \end{proof}
+
+        \end{enumerate}
+
+\end{enumerate}
+
+\end{document}

@@ -113,9 +113,9 @@ set is
   that $m^{2}$ may only be even if $m$ itself is even.
 \end{proof}
 
-\begin{thm}
+\begin{theorem}
   $\sqrt{2} \notin \Q$.
-\end{thm}
+\end{theorem}
 \begin{proof}
   Assume for the sake of contradiction that $\sqrt{2} \in \Q$.
   Since $\sqrt{2} \in \Q$, there exist integers $m, n$ such that $n \ne 0$
@@ -189,7 +189,7 @@ Properties of $\abs{\cdot}$:
   \]
 \end{defn}
 
-\begin{thm}[Algebraic Limit Theorem]
+\begin{theorem}[Algebraic Limit Theorem]
   Let $(a_{n}) \to a$, $(b_{n}) \to b$ and $c \in \R$.
   Then:
   \begin{itemize}
@@ -200,9 +200,9 @@ Properties of $\abs{\cdot}$:
     \item $\parens*{\dfrac{a_{n}}{b_{n}}} \to \dfrac{a}{b}$, given $b \ne 0$ and $\forall n \in \N, b_{n} \ne 0$.
   \end{itemize}
 
-\end{thm}
+\end{theorem}
 
-\begin{thm}[Bolzano-Weierstrass]
+\begin{theorem}[Bolzano-Weierstrass]
   Every bounded sequence has a convergent subsequence.
 
   \begin{proof}
@@ -247,7 +247,7 @@ Properties of $\abs{\cdot}$:
     Applying the Squeeze Theorem to this, we find our subsequence $x_{n_{k}}$ also converges to this value,
     thus our convergent subsequence is found.
   \end{proof}
-\end{thm}
+\end{theorem}
 
 \begin{defn}{Cauchy Sequence}{}
   A sequence $(a_{n})$ is considered \emph{Cauchy} if
@@ -308,13 +308,13 @@ Properties of $\abs{\cdot}$:
     Thus, taking $m = n + 1$, we find $\abs*{a_{n + 1}} < \eps$. Since this is true for every $n > N$, the sequence must converge to 0.
   \end{proof}
 \end{prop}
-\begin{thm}
+\begin{theorem}
   The harmonic series
   \[
   \sum_{n = 1}^{\infty}\frac{1}{n}
   \]
   diverges.
-\end{thm}
+\end{theorem}
 
 \begin{prop} Assume $0 \le a_{n} \le b_{n}$ for all $n \in \N$. Then,
   \begin{itemize}
@@ -377,10 +377,10 @@ Properties of $\abs{\cdot}$:
   converges but it is not \emph{absolutely} convergent.
 \end{defn}
 
-\begin{thm}[Riemann Rearrangement Theorem]\label{thm:riemann-rearrangement}
+\begin{theorem}[Riemann Rearrangement Theorem]\label{thm:riemann-rearrangement}
   Any conditionally convergent series can be rearranged such that for any $L \in R^{*}$ (the extended real line),
   the series converges to $L$.
-\end{thm}
+\end{theorem}
 
 \section{Topology of $\R$}
 
@@ -400,13 +400,13 @@ Properties of $\abs{\cdot}$:
   A set $A \subseteq R$ is considered \emph{closed} if its complement $A^{C}$ is open.
 \end{defn}
 
-\begin{thm}[Union of Closed Sets]\label{thm:union-closed-sets}
+\begin{theorem}[Union of Closed Sets]\label{thm:union-closed-sets}
   If $\set{U_{\alpha}}_{\alpha \in \sS}$ is a class of closed sets, then
   \begin{itemize}
     \item $\ds\bigcap_{\alpha \in \sS}U_{\alpha}$ is closed.
     \item If $\abs{\sS} = n$ is finite, then $\ds\bigcup_{\alpha = 1}^{n}U_{\alpha}$ is closed.
   \end{itemize}
-\end{thm}
+\end{theorem}
 
 \begin{prop}
   Every open set is a countable union of open intervals.
@@ -416,9 +416,9 @@ Properties of $\abs{\cdot}$:
   A point $x$ is a limit point of a set $A$ if there exist a sequence of points $a_{1}, a_{2}, \ldots \to x$ where each $a_{n} \in A \setminus \set{x}$.
 \end{defn}
 
-\begin{thm}[Closed iff contains limit points]\label{defn:closed-iff-limit-points}
+\begin{theorem}[Closed iff contains limit points]\label{defn:closed-iff-limit-points}
   A set $A$ is closed if and only if it contains all of its limit points.
-\end{thm}
+\end{theorem}
 
 \subsection{Covers and Subcovers}
 
@@ -441,29 +441,68 @@ Properties of $\abs{\cdot}$:
 This is perhaps the most important definition of the next ten years, and it is (without~\nameref{thm:heine-borel}) very difficult
 to prove a set $A$ is compact.
 
-\begin{thm}[Heine-Borel]\label{thm:heine-borel}
+\begin{theorem}[Heine-Borel]\label{thm:heine-borel}
   For a set $A \subseteq \R$, the following are equivalent
   \begin{itemize}
     \item $A$ is compact.
     \item $A$ is closed and bounded.
     \item For any sequence $(a_{n})$ in $A$, there is a subsequence $(a_{n_{k}})$ that converges to a point in $A$.
   \end{itemize}
-\end{thm}
+\end{theorem}
 
 \section*{Derivatives \& Integrals}
 
 % Need to define: Partition, Riemann-Darboux Sum
 % Prove add-1 point to partition -> better estimate
 
-\begin{defn}[Riemann-Darboux Sum]
-  If $f \from I \to \R$ bounded and $P$ is a partition of $I$, then the upper and lower Riemann sums are denoted:
-  \[ U(f) = \inf U(f, P) \]
-  \[ L(f) = \sup L(f, P) \]
-  and $f$ is integrable if $U(f) = L(f)$.
+\begin{defn}[Partition]
+  A \emph{partition} $P$ of an interval $[a, b]$ is a set of points
+  \[ P = \set*{x_{0}, x_{1}, \ldots, x_{n - 1}, x_{n}} \]
+  where $x_{0} = a$, $x_{n} = b$ and $x_{i} > x_{i - 1}$.
 \end{defn}
 
-\begin{defn}[Integrable Function]
-  Note that
+\begin{defn}[Riemann Sum with Partition]
+  Given some function $f \from I \to \R$  with $I = [a, b]$ and $P$ a partition of $I$,
+  the ``upper sum'' is defined as
+  \[ U(f, P) = \sum_{i = 1}^{\abs{P} + 1} M_{i}(x_{i} - x_{i - 1}) \]
+  and the ``lower sum'' is
+  \[ L(f, P) = \sum_{i = 1}^{\abs{P} + 1} m_{i}(x_{i} - x_{i - 1}) \]
+  where $M_{i}, m_{i}$ are the maximum and minimum values of $f$ on $[x_{i - 1}, x_{i}]$.
 \end{defn}
+
+\begin{defn}[Riemann-Darboux Integral]
+  Define the sums
+  \[ U(f) = \inf\set*{U(f, P) : [a, b] \text{ partitioned by } P} \]
+  and
+  \[ L(f) = \sup\set*{L(f, P) : [a, b] \text{ partitioned by } P}. \]
+  A function $f$ is considered \emph{integrable} if $U(f) = L(f)$, denoted by
+  \[ \int_{a}^{b} f \, dx = U(f) = L(f). \]
+\end{defn}
+
+\begin{theorem}[Darboux's Criterion]
+  Let $f \from [a, b] \to \R$ be bounded.
+  $f$ is integrable if and only if for all $\eps > 0$
+  there is a partition $P_{\eps}$ such that
+  \[ U(f, P_{\eps}) - L(f, P_{\eps}) < \eps. \]
+\end{theorem}
+\begin{proof}
+  ($\impliedby$) Let $\eps > 0$ and choose $P_{\eps}$ such that
+  \[ U(f, P_{\eps}) - L(f, P_{\eps}) < \eps. \]
+  Recall that $U(f) = \sup\set*{U(f, P) : P \text{ partition of } [a, b]}$
+  and similar for $L(f)$. Thus, we can see
+  \[ L(f) \ge L(f, P_{\eps}), U(f) \le U(f, P_{\eps}) \implies U(f) - L(f) < \eps. \]
+  Since this is applicable for all $\eps$, thus $f$ is integrable since $U(f) = L(f)$.
+
+  ($\implies$) Let $\eps > 0$. Since $f$ is integrable, $U(f) = L(f)$.
+  Let $P_{1}, P_{2}$ be partitions such that
+  \[ L(f) - \frac{\eps}{2} < L(f, P_{1}) \]
+  and then
+  \[ U(f) + \frac{\eps}{2} > U(f, P_{1}). \]
+  This then implies
+  \[ U(f, P_{2}) - L(f, P_{1}) < U(f) - L(f) + \eps = \eps. \]
+  Thus, refine $P_{\eps} = P_{1} \union P_{2}$, and so $P_{\eps}$ gives better estimates and thus we have a single partition, which then shows
+  \[ U(f, P_{\eps}) - L(f, P_{\eps}) \le U(f, P_{2}) - L(f, P_{1}) < \eps, \]
+  as desired.
+\end{proof}
 
 \end{document}

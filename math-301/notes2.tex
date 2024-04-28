@@ -1,0 +1,147 @@
+% -*- compile-command: "latexmk -pdf notes2.tex" -*-
+\documentclass{article}
+
+\let\boxedthm1
+\input{template}
+\usepackage{cleveref}
+
+\newcommand{\todo}{\textbf{TODO}: }
+
+\title{Intro to Real Analysis}
+\author{Sam Price}
+
+\begin{document}
+
+\maketitle
+
+% Want to:
+% Show | x - y | < \eps => x = y
+
+\section*{Review Some Stuff}
+
+\subsection*{Absolute Value}
+As a reminder, we know that the absolute value is:
+\[ \abs{x} = \begin{cases} x & x \ge 0\\ -x & x < 0. \end{cases} \]
+
+This means that $\abs{x} < a$ is the same as $-a < x < a$, which is useful if one ever needs to swap absolute values in and out.
+
+Indeed, this function has a few nice properties, where for all $x, y, z \in \R$:
+\begin{itemize}
+  \item $\abs{xy} = \abs{x}\abs{y}$
+  \item $\abs{x + y} \le \abs{x} + \abs{y}$, which is sometimes called the Triangle Inequality.
+        This is invaluable when trying to squeeze intermediate steps into the most
+        unwieldy $<$-chain you've ever constructed.
+  \item $\abs{x - y} = \abs{y - x}$
+  \item $\abs{x^{z}} = \abs{x}^{z}$, somewhat implied by the product law above.
+        Note that $x = 0$ will probably not play nice with $z < 0$, since dividing by
+        zero can be a bit of a pain.
+\end{itemize}
+
+\subsection*{Sets}
+In this, we will let $\N \subset \Z \subset \Q \subset \R$ be their normal designations, and $\N$ will \emph{start with} 1, not 0.
+I will also do my best while writing to make sure to use $A \subset B$ \emph{only} when I can justify $A \ne B$, and use $A \subseteq B$ normally.
+
+\section*{Suprema and Infima}
+
+\section*{Sequences}
+
+Sequences are the foundation for everything in analysis --- or at least Spence will make it seem that way.
+I believe Fall~2024 actually has Hough teaching this course (Math 301) but I could be mistaken.
+In any case, sequences are invaluable and in fact it is very possible you could reach what
+Terrence Tao refers to as some ``post-rigor'' stage with sequences: using them informally and heuristically
+while being able to adapt them formally when needed.
+
+\begin{defn}[Sequences]\label{defn:sequence}
+  A sequence $(a_{n})_{n \in \N}$ is an infinite ordered list of elements of some set, in this course $\R$.
+  This can be written as simply $(a_{n})$ or $a_{n}$, depending on context the latter may refer to a single specific element of $(a_{n})$.
+  Sometimes, one might see a sequence indexed by a set other than $\N$, such as $\R$. In general, they are written as
+  \[ (a_{i})_{i \in I} \]
+  with $I$ being some indexing set. In this, unless stated otherwise, sequences are always infinite.
+\end{defn}
+
+\begin{defn}[Sequence Convergence]\label{defn:convergence}
+  A sequence $(a_{n})$ can be thought of as \emph{converging} to a value $a \in \R$ if it is always arbitrarily close
+  to $a$ after a ``certain point''. This is denoted as $(a_{n}) \to a$ and means that for every $\eps > 0$,
+  there is some natural number $N$ such that for $n > N$, there must be
+  \[ \abs{a_{n} - a} < \eps. \]
+  This can be thought of similarly to the (perhaps overly orchestrated) criteria that $x = y$.
+  Note also that given some $N$ this holds for, any $M > N$ also will clearly hold for a given $\eps$.
+
+  \todo Illustration, in particular showing that for $n \le N$, $\abs{a_{n} - a} < \eps$ \emph{may} hold,
+  but not necessarily.
+\end{defn}
+
+\begin{theorem}[Monotone Convergence Theorem]\label{thm:mct}
+  Every monotone (non-decreasing or non-increasing) and bounded sequence $(a_{n})$ is convergent.
+\end{theorem}
+
+Before we get to the fun part, let us (formally) define what a subsequence is.
+Intuitively, it's just a some part of a sequence ``in order'', which is absolutely true.
+To nail down intuition, we define it as:
+
+\begin{defn}[Subsequence]\label{defn:subsequence}
+  A subsequence of $(a_{k})$ is a sequence $(a_{n_{k}})$ where $(n_{k})$
+  is a strictly increasing sequence of natural numbers.
+\end{defn}
+
+This means that one example is $(n_{k}) = (1, 3, 17, 1001, \ldots)$, but a non-example
+could be something like $(n_{k}) = (1, 3, \bm{3}, 17, \bm{14}, \ldots)$ which is invalid both because 3 \emph{repeats} and
+14 is \emph{non-increasing} (i.e.\ both indices' elements do not grow by one or more when compared to the previous.)
+
+The following theorem is incredibly important, and is attributed to Karl Weierstrass and Bernard Bolzano.
+This will be proven in class, but is super important --- I recommend sketching out the diagram yourself to visualize why this
+must be true.
+\begin{theorem}[Bolzano-Weierstrass]\label{thm:bolzano-weierstrass}
+  Every bounded sequence $(a_{n})$ has a convergent subsequence.
+\end{theorem}
+\begin{proof}
+  Let $(a_{n})$ be a bounded sequence below and above by $m, M \in \R$ (that is, for all $n$, $m \le a_{n} \le M$.)
+\end{proof}
+
+\begin{defn}[Cauchy Sequence]\label{defn:cauchy}
+  A sequence $(a_{n})$ is called \emph{Cauchy} (after Augustin Louis Cauchy) if
+  for all $\eps > 0$, there is some natural number $N$ such that for all $m, n > N$ there is
+  \[ \abs{a_{m} - a_{n}} < \eps. \]
+  This is similar to simply \emph{convergence}, but is different in the sense that
+  instead of measuring how close the sequence gets to some ``final'' value, it measures
+  how terms get close \emph{and then stay close}.
+  In many proofs, one will assume without loss of generality that $m > n$ or vice versa.
+\end{defn}
+
+\begin{theorem}\label{thm:cauchy-iff-convergent}
+  A sequence $(a_{n})$ is Cauchy if and only if it is convergent.
+\end{theorem}
+\begin{proof}
+  ($\implies$) Let $\eps > 0$, and note that $\eps/2 > 0$ as well. Then, there exists some $N$ such that for $m > n > N$
+  \[  \]
+\end{proof}
+
+\subsection*{Series}
+
+Your favorite friend from Calculus II\@! Unfortunately, or perhaps fortunately, we get to formulate series using sequences.
+However, our series is thought of as
+\[ \sum_{n = 1}^{\infty}a_{n} \]
+for some sequence $(a_{n})$, but that isn't particularly useful as of yet.
+Instead, we consider the sequence of \emph{partial sums} $(s_{n})$, where
+\[ s_{n} = \sum_{k = 1}^{n}a_{k}. \]
+This allows us to talk about series convergence, everyone's favorite thing to check for. Similar to sequence convergence,
+series convergence looks like this:
+\begin{defn}[Series Convergence]
+  A series $\sum a_{k} = S$ if:
+  \[ \forall \eps > 0\, \exists N \in \N\, \forall n > N, \abs{s_{n} - S} < \eps.  \]
+\end{defn}
+
+
+\section*{Topology of $\R$}
+
+\subsection*{Closed and Open Sets}
+
+\subsection*{Compactness}
+
+\subsubsection*{Why Compactness Matters}
+
+\section*{Limits, Continuity and Differentiability}
+
+\section*{Integrals}
+
+\end{document}

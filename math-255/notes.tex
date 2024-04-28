@@ -152,9 +152,60 @@ which is simply a scalar function $f(x, y, z)$.
 
 \begin{theorem}
   \[
-    \iint_{C} \vec{F} \cdot \dx\vec{r} = \iint_{D} \curl \vec{F} \cdot \khat \dx A
+    \int_{C} \vec{F} \cdot \dx\vec{r} = \iint_{D} \curl \vec{F} \cdot \khat \dx A
   \]
   where $\vec{F} = \veclit{P, Q, 0}$.
 \end{theorem}
+
+\begin{defn}[Conservativeness]
+  A vector field $\vec{F}$ is conservative if
+  \[ \curl \vec{F} = 0. \]
+\end{defn}
+
+If $C$ is a curve parametrized by $\vec{r}(t) = \veclit{x(t), y(t)}$, then the unit tangent vector to $C$ is
+\[ \vec{T}(t) = \frac{\vec{r}'(t)}{\norm{\vec{r}'(t)}} \]
+and the unit normal vector is
+\[ \vec{n}(t) = \frac{\veclit{y'(t), -x'(t)}}{\norm{\veclit{y'(t), -x'(t)}}}. \]
+
+Then, we see
+\begin{align*}
+  \int_{C} \vec{F} \cdot \vec{n} \dx S &= \int_{C} \veclit{P, Q} \cdot \veclit{y'(t), -x'(t)} \, \dx t\\
+  &= \int_{C} Py' - Qx' \, \dx t\\
+  &= \int_{C} P \dx y - Q \dx x\\
+  &= \iint_{D} \frac{\del P}{\del x} + \frac{\del Q}{\del y} \, \dx A\\
+  &= \iint_{D} \div{\vec{F}} \dx A
+\end{align*}
+
+\subsection*{Surface Integrals}
+
+Let $S$ be a 2-dimensional surface
+\[ \iint_{S} \, \dx S = \quad \text{surface area of $S$} \]
+and $E$ be 3-dimensional
+\[ \iint_{E} \, \dx V = \quad \text{volume of $E$}. \]
+
+Much like triple integrals, an empty integrand still has physical meaning while a function $f$ in the integrand is more
+of an ``evaluation'' of $f$ over the whole surface.
+
+Now, consider a continuous vector field $\vec{F}$ defined on an \emph{orientable} (Definition \ref{defn:orientable}) surface $S$.
+The surface integral of $\vec{F}$ over $S$ is
+\[ \iint_{S} \vec{F} \dx \bm{S} = \iint_{S} \vec{F} \cdot \vec{n} \dx S = \iint_{D} \div \vec{F} \dx A \]
+which is sometimes called the \emph{flux} of $\vec{F}$ over $S$.
+
+\begin{defn}[Orientable Surface]\label{defn:orientable}
+  A surface is \emph{orientable} if there is a consistent sense of ``clockwise'' or ``up''/``down''.
+\end{defn}
+
+\begin{remark}
+  The tangent plane to a surface $S = \veclit{x, y, z}$ at $p$ by considering the plane defined by
+  the parametrization $\veclit{x(u, v), y(u, v), z(u, v)}$ we would then have
+  \[ \vec{r}_{u} \times \vec{r}_{v} = \vec{n}. \]
+  With $\vec{r}_{u}, \vec{r}_{v}$ the vectors defining the tangent plane, and
+  $\vec{n}$ some scalar multiple of the normal vector to the tangent plane.
+\end{remark}
+
+Thus, we can say (where $D$ is the projection of $S$ into the $u,v$-plane)
+\begin{align*}
+  \iint\limits_{S} \vec{F} \cdot \dx \bm{S} &= \iint\limits_{D} \vec{F} \cdot (\vec{r}_{u} \times \vec{r}_{v}) \, \dx A
+\end{align*}
 
 \end{document}
